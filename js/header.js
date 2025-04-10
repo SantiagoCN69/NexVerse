@@ -7,6 +7,7 @@ const toggleCategoria = document.getElementById('toggleCategoria');
 const categoriasLista = document.getElementById('categoriasLista');
 const header = document.querySelector("header");
 
+
 // Modo Claro/Oscuro
 let preferenciaModo = localStorage.getItem('modo') || 'oscuro';
 

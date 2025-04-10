@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/poppins/Poppins-Regular.woff2') format('woff2');
+}
+
 /* ------------------------------------
     RESETEO GENERAL Y FUENTE
 ------------------------------------ */
@@ -36,44 +44,25 @@ canvas#particles {
   z-index: -1;
 }
 
-body::before,
-body::after {
-  content: "";
+body {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
+  background: -webkit-linear-gradient(90deg, #0f2027,#203a43,#772323,#942a0f,#5c2e1e, #6d0f29);
+  background: linear-gradient(90deg, #105775,#203a43,#772323,#c13512,#5c2e1e, #6d0f29);                                                                                         
   background-size: 400% 400%;
+  animation: fondo 20s ease-in-out infinite;
   z-index: -2;
   opacity: 1;
-  transition: opacity 1s ease;
-  pointer-events: none;
 }
-
-body::before {
-  background: linear-gradient(90deg, #105775, #203a43, #772323, #c13512, #5c2e1e, #6d0f29);
-  animation: fondo 20s ease-in-out infinite;
-  background-size: 400% 400%;
-}
-
-body::after {
-  background: linear-gradient(90deg, #ffbe5b, #5db6ff, #ff6884, #ffbc6a, #ea72ff);
-  opacity: 0;
-  background-size: 400% 400%;
-}
-
-body.claro::after {
-  opacity: 1;
+body.claro {
+  background: -webkit-linear-gradient(90deg, #ffcf86, #84c8ff, #ff6884, #ffbc6a, #ea72ff);
+  background: linear-gradient(90deg, #ffbe5b, #91ceff, #db6379, #ffcc8e, #ea72ff);
+  background-size: 300% 300%;
   animation: fondo 20s ease-in-out infinite;
 }
-
-body.claro::before {
-  opacity: 0;
-  animation: none;
-}
-
-
 /* ------------------------------------
     CONTENIDO PRINCIPAL
 ------------------------------------ */
@@ -103,11 +92,7 @@ p {
 /* ------------------------------------
     ANIMACIONES
 ------------------------------------ */
-@keyframes gradientBG {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%;}
-}
+
 
 @keyframes fondo {
   0%   { background-position: 0% 50%; }
@@ -115,44 +100,74 @@ p {
   100% { background-position: 0% 50%; }
 }
 
+@keyframes gradientBG {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
 /* ------------------------------------
     BOTÓN CON GRADIENTE Y SOMBRA ANIMADA
 ------------------------------------ */
 #randomBtn {
-  background: linear-gradient(270deg,#551717, #1f7070, #2d1e61, #772677, #721458, #721414);
-  background-size: 1900% 1000%;
-  animation: gradientBG 20s linear infinite;
-  color: var(--texto);
-  padding: 15px 30px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: transform 0.4s ease;
-  will-change: transform;
-  -webkit-tap-highlight-color: transparent;
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+  background: -webkit-linear-gradient(#6a2c2c, #1f705f, #7a4e5f, #9e3d5e, #8d2b13, #5f1472);
   
-}
-#randomBtn.claro {
-  background: linear-gradient(
-    270deg,
-    #ff6161,
-    #ffe368,
-    #b2ff5b,
-    #5eff87,
-    #77ffb4,
-    #7790ff,
-    #b3ffff,
-    #d774ff,
-    #ff6bda,
-    #ff6060
-  );
-  background-size: 1900% 1000%;
-  animation: gradientBG 20s linear infinite;
-  color: var(--texto);
-}
+    background: linear-gradient(#6a2c2c, #1f705f, #7a4e5f, #9e3d5e, #8d2b13, #5f1472);
+  
+  
+    background-size: 400% 400%;
+    animation: gradientBG 20s linear infinite;
+    color: var(--texto);
+    padding: 15px 30px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+    will-change: transform;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+  }
+  #randomBtn.claro {
+  background: -webkit-linear-gradient(    270deg,
+      #ffe600,
+      #ffcf33,
+      #ff964c,
+      #ff2a68,
+      #ff7f7f,
+      #ffb3b3,
+      #b3ffff,
+      #80e5ff,
+      #4da3ff,
+      #00b0ff
+    );
+    background: linear-gradient(
+      270deg,
+      #ffe600,
+      #ffcf33,
+      #ff964c,
+      #ff2a68,
+      #ff7f7f,
+      #ffb3b3,
+      #b3ffff,
+      #80e5ff,
+      #4da3ff,
+      #00b0ff
+    );
+    background-size: 1900% 1000%;
+    animation: gradientBG 20s linear infinite;
+    color: var(--texto);
+    padding: 15px 30px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+    will-change: transform;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+  }
+
 
 #randomBtn.activo {
   cursor: pointer;
@@ -290,15 +305,16 @@ a:hover i {
 .pulso {
   animation: pulso 0.4s ease;
 }
-@keyframes girarRebote {
-  0% { transform: rotate(0deg) scale(1); }
-  50% { transform: rotate(180deg) scale(1.2); }
-  100% { transform: rotate(360deg) scale(1); }
+@keyframes girar-rebote {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(180deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .girar-rebote {
-  animation: girarRebote 0.4s ease;
+  animation: girar-rebote 1s ease;
 }
+
 @keyframes bounceGiro {
   0% { transform: rotate(0deg) translateY(0); }
   30% { transform: rotate(15deg) translateY(3px); }
@@ -474,7 +490,7 @@ nav {
   opacity: 0;
   border-radius: 4px;
   transition:max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
-  
+
 }
 
 .categorias-lista.active {
@@ -516,7 +532,7 @@ nav {
 
 .subcategorias-lista.active {
   pointer-events: all;
-  max-height: 500px;
+  max-height: 600px;
   opacity: 1;
   padding: 0.2rem 1rem;
   transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
@@ -537,15 +553,16 @@ nav {
     opacity: 0;
     pointer-events: none;
     gap: 25px;
-    max-height: 70vh; 
-    overflow-y: auto;
+    max-height: 70vh;
+    overflow-y: hidden;
+    overflow-x: hidden;
     overscroll-behavior: contain;
     scrollbar-width: thin;
     scrollbar-color: var(--texto-opaco) transparent;
   }
 
   .nav-list::-webkit-scrollbar {
-    width: 6px;
+    width: 0px;
   }
 
   .nav-list::-webkit-scrollbar-thumb {

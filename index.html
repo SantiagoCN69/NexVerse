@@ -14,68 +14,70 @@
   <!-- Open Graph (para compartir en redes) -->
   <meta property="og:title" content="Páginas Randoms">
   <meta property="og:description" content="Haz clic y déjate llevar a páginas sorprendentes con estilo moderno.">
-  <meta property="og:image" content="https://sitiosrandoms.netlify.app/icons/banner.png">
-  <meta property="og:url" content="https://sitiosrandoms.netlify.app">
+  <meta property="og:image" content="https://nexverse.netlify.app/icons/banner.png">
+  <meta property="og:url" content="https://nexverse.netlify.app/">
   <meta property="og:type" content="website">
 
   <!-- Manifest + Estilos -->
   <link rel="icon" href="/icons/icon-512.png" type="image/png">
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="icons/fontawesome/fontawesome.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+  <link rel="stylesheet" href="icons/fontawesome/fontawesome-subset.css" />
 
-  <!-- Service Worker -->
-  <script>
+  <!-- Service Worker 
+     <script>
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/sw.js")
         .then(() => console.log("Service Worker registrado"))
         .catch(err => console.error("SW Error:", err));
     }
-  </script>
+  </script>-->
+
 </head>
 <body>
   <canvas id="particles"></canvas>
 
   <header>
     <nav>
-      <button class="menu-toggle" id="menuToggle">
+      <button class="menu-toggle" id="menuToggle" aria-label="Alternar menú de navegación" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
       </button>
-      <ul class="nav-list left" id="navList">
+      <ul class="nav-list left" id="navList" aria-label="Menú de navegación">
         <li>
-          <button id="toggleCategoria" class="navBoton"><i class="fas fa-list-ul"></i> Categorías</button>
-          <div class="categorias-lista" id="categoriasLista">
-            <button id="toggleTodas" class="toggle-todas">Seleccionar Todas</button>
+          <button id="toggleCategoria" class="navBoton" aria-label="Mostrar categorías">
+            <i class="fas fa-list-ul"></i> Categorías
+          </button>
+          <div class="categorias-lista" id="categoriasLista" aria-label="Lista de categorías">
+            <button id="toggleTodas" class="toggle-todas" aria-label="Seleccionar o deseleccionar todas las categorías">Seleccionar Todas</button>
           
             <div class="categoria-con-sub">
-              <button class="categoria-btn"><i class="fas fa-folder"></i> Categoría 1</button>
-              <div class="subcategorias-lista">
-                <button data-subcategoria="Subcategoría A">Subcategoría A</button>
-                <button data-subcategoria="Subcategoría B">Subcategoría B</button>
-                <button data-subcategoria="Subcategoría C">Subcategoría C</button>
+              <button class="categoria-btn" aria-label="Categoría 1"><i class="fas fa-folder"></i> Categoría 1</button>
+              <div class="subcategorias-lista" aria-label="Subcategorías de Categoría 1">
+                <button data-subcategoria="Subcategoría A" aria-label="Seleccionar Subcategoría A">Subcategoría A</button>
+                <button data-subcategoria="Subcategoría B" aria-label="Seleccionar Subcategoría B">Subcategoría B</button>
+                <button data-subcategoria="Subcategoría C" aria-label="Seleccionar Subcategoría C">Subcategoría C</button>
               </div>
             </div>
           
             <div class="categoria-con-sub">
-              <button class="categoria-btn"><i class="fas fa-folder"></i> Categoría 2</button>
-              <div class="subcategorias-lista">
-                <button data-subcategoria="Subcategoría D">Subcategoría D</button>
-                <button data-subcategoria="Subcategoría E">Subcategoría E</button>
-                <button data-subcategoria="Subcategoría F">Subcategoría F</button>
+              <button class="categoria-btn" aria-label="Categoría 2"><i class="fas fa-folder"></i> Categoría 2</button>
+              <div class="subcategorias-lista" aria-label="Subcategorías de Categoría 2">
+                <button data-subcategoria="Subcategoría D" aria-label="Seleccionar Subcategoría D">Subcategoría D</button>
+                <button data-subcategoria="Subcategoría E" aria-label="Seleccionar Subcategoría E">Subcategoría E</button>
+                <button data-subcategoria="Subcategoría F" aria-label="Seleccionar Subcategoría F">Subcategoría F</button>
               </div>
             </div>
           
             <!-- Puedes seguir con más categorías -->
           </div>
         </li>
-        <li><button id="noRepetirBtn" class="navBoton"><i class="fas fa-sync-alt"></i>Si repetir</button></li>
-        <li><button id="sonidoBtn" class="navBoton"><i class="fas fa-headphones"></i>Sonido: ON</button></li>
-        <li><button id="modoBtn" class="navBoton"><i class="fas fa-moon"></i> Modo Claro</button></li>
-        <li id="instalarBtnLi"><button id="instalarBtn" class="navBoton"><i class="fas fa-cloud-download-alt"></i> Instalar APP</button></li>
-        <li><button id="sugerirBtn" class="navBoton"><i class="fas fa-globe"></i> Sugerir sitio</button></li>
+        <li><button id="noRepetirBtn" class="navBoton" aria-label="Alternar modo de repetición de páginas"><i class="fas fa-rotate"></i>Si repetir</button></li>
+        <li><button id="sonidoBtn" class="navBoton" aria-label="Alternar sonido"><i class="fas fa-headphones"></i>Sonido: ON</button></li>
+        <li><button id="modoBtn" class="navBoton" aria-label="Cambiar modo claro u oscuro"><i class="fas fa-moon"></i> Tema: Claro</button></li>
+        <li id="instalarBtnLi"><button id="instalarBtn" class="navBoton" aria-label="Instalar aplicación"><i class="fas fa-cloud-download-alt"></i> Instalar APP</button></li>
+        <li><button id="sugerirBtn" class="navBoton" aria-label="Sugerir un sitio web"><i class="fas fa-globe"></i> Sugerir sitio</button></li>
       </ul>
     </nav>
   </header>

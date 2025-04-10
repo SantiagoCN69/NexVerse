@@ -3,14 +3,14 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://sitiosrandoms.netlify.app/</loc>
+    <loc>https://nexverse.netlify.app/</loc>
     <lastmod>2025-04-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://sitiosrandoms.netlify.app/sugerir.html</loc>
+    <loc>https://nexverse.netlify.app/sugerir.html</loc>
     <lastmod>2025-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
