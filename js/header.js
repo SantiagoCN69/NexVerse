@@ -90,117 +90,121 @@ window.addEventListener('resize', () => {
     }
 });
 
+
 // Categorías Toggle
 function toggleCategoriasLista() {
-  categoriasLista.classList.toggle('active');
-  actualizarHeaderActivo();
-
-  const icono = toggleCategoria.querySelector('i');
-  icono.classList.add('bounce-giro');
-  icono.addEventListener('animationend', () => {
+    categoriasLista.classList.toggle('active');
+    actualizarHeaderActivo();
+    actualizarContadorCategorias();
+  
+    const icono = toggleCategoria.querySelector('i');
+    icono.classList.add('bounce-giro');
+    icono.addEventListener('animationend', () => {
       icono.classList.remove('bounce-giro');
-  }, { once: true });
-}
-
-
-
-// Actualiza el estado del header si hay algo abierto
-function actualizarHeaderActivo() {
+    }, { once: true });
+  }
+  
+  // Actualiza el estado del header si hay algo abierto
+  function actualizarHeaderActivo() {
     const hayActivos = categoriasLista.classList.contains("active") ||
-        [...document.querySelectorAll('.subcategorias')].some(el => el.classList.contains("active"));
-
+      [...document.querySelectorAll('.subcategorias')].some(el => el.classList.contains("active"));
+  
     header.classList.toggle("active", hayActivos);
-}
-
-// Subcategorías Toggle
-document.querySelectorAll('.categoria-btn').forEach(btn => {
+  }
+  
+  // 🔢 Actualizar contador en el botón de categorías
+  function actualizarContadorCategorias() {
+    const cantidad = subcategoriasSeleccionadas.length;
+    const existeSpan = toggleCategoria.querySelector('.contador-categorias');
+  
+    if (categoriasLista.classList.contains('active')) {
+      if (!existeSpan) {
+        const span = document.createElement('span');
+        span.className = 'contador-categorias';
+        span.textContent = ` (${cantidad})`;
+        toggleCategoria.appendChild(span);
+      } else {
+        existeSpan.textContent = ` (${cantidad})`;
+      }
+    } else if (existeSpan) {
+      existeSpan.remove();
+    }
+  }
+  
+  // Subcategorías Toggle
+  document.querySelectorAll('.categoria-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
-        const subcategoriaLista = e.currentTarget.nextElementSibling;
-        const iconElement = e.currentTarget.querySelector('i');
-        
-        // Cerrar todas las subcategorías abiertas
-        const todasSubcategorias = document.querySelectorAll('.subcategorias-lista');
-        const todosIconos = document.querySelectorAll('.categoria-btn i');
-        
-        todasSubcategorias.forEach((sub, index) => {
-            // Si la subcategoría no es la actual, se cierra
-            if (sub !== subcategoriaLista) {
-                sub.classList.remove('active');
-                todosIconos[index].classList.remove('fa-folder-open');
-            }
-        });
-        
-        if (subcategoriaLista) {
-            subcategoriaLista.classList.toggle('active');
-            
-            // Cambiar ícono de carpeta
-            iconElement.classList.toggle('fa-folder-open');
+      const subcategoriaLista = e.currentTarget.nextElementSibling;
+      const iconElement = e.currentTarget.querySelector('i');
+  
+      // Cerrar todas las subcategorías abiertas
+      const todasSubcategorias = document.querySelectorAll('.subcategorias-lista');
+      const todosIconos = document.querySelectorAll('.categoria-btn i');
+  
+      todasSubcategorias.forEach((sub, index) => {
+        if (sub !== subcategoriaLista) {
+          sub.classList.remove('active');
+          todosIconos[index].classList.remove('fa-folder-open');
         }
-        
-        actualizarHeaderActivo();
+      });
+  
+      if (subcategoriaLista) {
+        subcategoriaLista.classList.toggle('active');
+        iconElement.classList.toggle('fa-folder-open');
+      }
+  
+      actualizarHeaderActivo();
     });
-});
-
-// Botón random
-function manejarBotonRandom() {
-    randomBtn.addEventListener('click', () => {
-    });
-}
-
-// Eventos
-if (modoBtn) {
+  });
+  
+  // Botón random
+  function manejarBotonRandom() {
+    randomBtn.addEventListener('click', () => {});
+  }
+  
+  // Eventos
+  if (modoBtn) {
     modoBtn.addEventListener('click', cambiarModo);
-}
-
-if (menuToggle) {
+  }
+  
+  if (menuToggle) {
     menuToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleMenu();
+      e.stopPropagation();
+      toggleMenu();
     });
-}
-
-if (toggleCategoria) {
+  }
+  
+  if (toggleCategoria) {
     toggleCategoria.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleCategoriasLista();
+      e.stopPropagation();
+      toggleCategoriasLista();
     });
-}
-
-// Cerrar categorías/subcategorías al redimensionar
-window.addEventListener("resize", () => {
+  }
+  
+  // Cerrar categorías/subcategorías al redimensionar
+  window.addEventListener("resize", () => {
     categoriasLista.classList.remove("active");
     document.querySelectorAll(".subcategorias-lista").forEach(sub => sub.classList.remove("active"));
     document.querySelectorAll('.categoria-btn i').forEach(icon => icon.classList.remove('fa-folder-open'));
     header.classList.remove("active");
-});
-
-// Cerrar todo al hacer clic fuera
-document.addEventListener("click", (e) => {
-    // Verificar si el clic está fuera del header
+    actualizarContadorCategorias();
+  });
+  
+  // Cerrar todo al hacer clic fuera
+  document.addEventListener("click", (e) => {
     if (!header.contains(e.target)) {
-        // Cerrar menú de navegación
-        navList.classList.remove('active');
-        menuToggle.classList.remove('active');
-        header.classList.remove("menu-activo");
-
-        // Cerrar categorías y subcategorías
-        categoriasLista.classList.remove("active");
-        
-        // Cerrar todas las subcategorías
-        document.querySelectorAll(".subcategorias-lista").forEach(sub => {
-            console.log('Cerrando subcategoría:', sub);
-            sub.classList.remove("active");
-        });
-        
-        // Restaurar iconos de categorías
-        document.querySelectorAll('.categoria-btn i').forEach(icon => {
-            icon.classList.remove('fa-folder-open');
-        });
-        
-        // Remover estado activo del header
-        header.classList.remove("active");
+      navList.classList.remove('active');
+      menuToggle.classList.remove('active');
+      header.classList.remove("menu-activo");
+      categoriasLista.classList.remove("active");
+  
+      document.querySelectorAll(".subcategorias-lista").forEach(sub => sub.classList.remove("active"));
+      document.querySelectorAll('.categoria-btn i').forEach(icon => icon.classList.remove('fa-folder-open'));
+      header.classList.remove("active");
+      actualizarContadorCategorias();
     }
-});
+  });
+  
 
 //sonido
 const toggleSound = new Audio('assets/toggle.mp3');

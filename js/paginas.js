@@ -1,12 +1,13 @@
 const noRepetirBtn = document.getElementById('noRepetirBtn');
 const contadorSpan = document.getElementById('contador');
 const boton = document.getElementById('randomBtn');
+const contadorSubcats = document.getElementById('contadorSubcats');
+const mensajeFiltro = document.getElementById('mensajeFiltro');
 
 let paginas = [];
 let noRepetirActivo = localStorage.getItem('noRepetirActivo') === 'true';
 
 // ------------------- Cargar páginas -------------------
-
 fetch('paginas.json')
   .then(res => res.json())
   .then(data => {
@@ -16,7 +17,6 @@ fetch('paginas.json')
   .catch(err => console.error('Error cargando paginas:', err));
 
 // ------------------- Botón No Repetir -------------------
-
 noRepetirBtn.innerHTML = noRepetirActivo
   ? '<i class="fas fa-sync-alt"></i> No Repetir'
   : '<i class="fas fa-sync-alt"></i> Si Repetir';
@@ -24,7 +24,6 @@ noRepetirBtn.innerHTML = noRepetirActivo
 noRepetirBtn.addEventListener('click', () => {
   noRepetirActivo = !noRepetirActivo;
   localStorage.setItem('noRepetirActivo', noRepetirActivo);
-
   noRepetirBtn.innerHTML = noRepetirActivo
     ? '<i class="fas fa-sync-alt"></i> No Repetir'
     : '<i class="fas fa-sync-alt"></i> Si Repetir';
@@ -36,75 +35,7 @@ noRepetirBtn.addEventListener('click', () => {
   }, { once: true });
 });
 
-// ------------------- Botón aleatorio -------------------
-
-boton.addEventListener('click', () => {
-  if (!paginas || paginas.length === 0) {
-    console.error('La lista de páginas no está cargada.');
-    return;
-  }
-
-  let paginasDisponibles = paginas;
-
-  // 📌 Filtrar por subcategorías seleccionadas (si hay alguna activa)
-  if (subcategoriasSeleccionadas.length === 0) {
-    const mensaje = document.getElementById('mensajeFiltro');
-    const btn = document.getElementById('randomBtn');
-  
-    mensaje.textContent = 'Por favor, selecciona al menos una subcategoría.';
-    btn.classList.remove('activo');
-    btn.classList.add('inactivo', 'boton-error');
-  
-    btn.addEventListener('animationend', () => {
-      btn.classList.remove('boton-error');
-    }, { once: true });
-  
-    return;
-  }
-  
-  
-  
-
-paginasDisponibles = paginas.filter(p =>
-  subcategoriasSeleccionadas.includes(p.subcategoria)
-);
-
-
-  // 📌 Luego aplicar "No Repetir", si está activado
-  if (noRepetirActivo) {
-    const paginasVisitadas = JSON.parse(localStorage.getItem('paginasVisitadas')) || [];
-    paginasDisponibles = paginasDisponibles.filter(p => !paginasVisitadas.includes(p.id));
-  }
-
-  if (paginasDisponibles.length === 0) {
-    alert('🎉 ¡Felicidades, visitaste todas las páginas disponibles! 🎉');
-    return;
-  }
-
-  const paginaAleatoria = paginasDisponibles[Math.floor(Math.random() * paginasDisponibles.length)];
-  window.open(paginaAleatoria.url, '_blank');
-
-  // Guardar como visitada si "No Repetir" está activo
-  if (noRepetirActivo) {
-    let paginasVisitadas = JSON.parse(localStorage.getItem('paginasVisitadas')) || [];
-    if (!paginasVisitadas.includes(paginaAleatoria.id)) {
-      paginasVisitadas.push(paginaAleatoria.id);
-      localStorage.setItem('paginasVisitadas', JSON.stringify(paginasVisitadas));
-      actualizarContador();
-    }
-  }
-});
-
-
-// ------------------- Actualizar contador -------------------
-
-function actualizarContador() {
-  const visitadas = JSON.parse(localStorage.getItem('paginasVisitadas')) || [];
-  contadorSpan.innerHTML = `<i class="fas fa-chart-bar"></i> ${visitadas.length} vistas`;
-}
-
-// ------------------- subcategoias select -------------------
-
+// ------------------- subcategorías -------------------
 const subcategoriaBotones = document.querySelectorAll('.subcategorias-lista button');
 const toggleTodasBtn = document.getElementById('toggleTodas');
 let subcategoriasSeleccionadas = JSON.parse(localStorage.getItem('subcategoriasSeleccionadas')) || [];
@@ -125,12 +56,12 @@ function toggleSubcategoria(boton, activar) {
 
   localStorage.setItem('subcategoriasSeleccionadas', JSON.stringify(subcategoriasSeleccionadas));
   actualizarEstadoCategorias();
+  actualizarBotonAleatorio();
 }
 
 // Verificar si todas las subcategorías dentro de una categoría están activas
 function actualizarEstadoCategorias() {
   const categorias = document.querySelectorAll('.categoria-con-sub');
-
   categorias.forEach(categoria => {
     const subBtns = categoria.querySelectorAll('.subcategorias-lista button');
     const todasActivas = Array.from(subBtns).every(b => b.classList.contains('subcategoria-activa'));
@@ -144,12 +75,23 @@ function actualizarEstadoCategorias() {
   });
 }
 
-// Inicializar subcategorías (desde localStorage o activar todas)
+// Botón seleccionar/deseleccionar todas
+toggleTodasBtn.addEventListener('click', () => {
+  const todasSeleccionadas = Array.from(subcategoriaBotones).every(b => b.classList.contains('subcategoria-activa'));
+  subcategoriaBotones.forEach(b => {
+    toggleSubcategoria(b, !todasSeleccionadas);
+  });
+
+  toggleTodasBtn.textContent = !todasSeleccionadas ? 'Ninguna' : 'Todas';
+  toggleTodasBtn.classList.toggle('activo', !todasSeleccionadas);
+  mensajeFiltro.textContent = '';
+  actualizarBotonAleatorio();
+});
+
+// Inicializar subcategorías
 function inicializarSubcategorias() {
   if (subcategoriasSeleccionadas.length === 0) {
-    subcategoriaBotones.forEach(b => {
-      toggleSubcategoria(b, true);
-    });
+    subcategoriaBotones.forEach(b => toggleSubcategoria(b, true));
     toggleTodasBtn.textContent = 'Deseleccionar Todas';
   } else {
     subcategoriaBotones.forEach(b => {
@@ -159,50 +101,96 @@ function inicializarSubcategorias() {
       }
     });
 
-    const todasSeleccionadas = Array.from(subcategoriaBotones).every(b =>
-      b.classList.contains('subcategoria-activa')
-    );
-    toggleTodasBtn.textContent = todasSeleccionadas ? 'Deseleccionar Todas' : 'Seleccionar Todas';
+    const todasSeleccionadas = Array.from(subcategoriaBotones).every(b => b.classList.contains('subcategoria-activa'));
+    toggleTodasBtn.textContent = todasSeleccionadas ? 'Ninguna' : 'Todas';
   }
+
+  actualizarBotonAleatorio();
 }
 
-// Click individual a subcategorías
+// Click individual
 subcategoriaBotones.forEach(boton => {
   boton.addEventListener('click', () => {
     const subcat = boton.dataset.subcategoria;
+    toggleSubcategoria(boton, !subcategoriasSeleccionadas.includes(subcat));
+  });
+});
 
-    if (subcategoriasSeleccionadas.includes(subcat)) {
-      toggleSubcategoria(boton, false);
+// ------------------- Botón Aleatorio -------------------
+boton.addEventListener('click', () => {
+  if (subcategoriasSeleccionadas.length === 0 || paginas.length === 0) return;
+
+  let paginasDisponibles = paginas.filter(p => subcategoriasSeleccionadas.includes(p.subcategoria));
+
+  if (noRepetirActivo) {
+    const paginasVisitadas = JSON.parse(localStorage.getItem('paginasVisitadas')) || [];
+    paginasDisponibles = paginasDisponibles.filter(p => !paginasVisitadas.includes(p.id));
+  }
+
+  if (paginasDisponibles.length === 0) {
+    alert('¡Felicidades, visitaste todas las páginas disponibles!');
+    return;
+  }
+
+  const paginaAleatoria = paginasDisponibles[Math.floor(Math.random() * paginasDisponibles.length)];
+  
+  // Validación de URL segura
+  try {
+    const urlObj = new URL(paginaAleatoria.url);
+    const esURLValida = ['http:', 'https:'].includes(urlObj.protocol);
+    
+    if (esURLValida) {
+      const nuevaVentana = window.open(paginaAleatoria.url, '_blank', 'noopener,noreferrer');
+      nuevaVentana.opener = null;
     } else {
-      toggleSubcategoria(boton, true);
+      console.error('URL no válida:', paginaAleatoria.url);
+      alert('No se puede abrir esta página.');
+      return;
     }
+  } catch (error) {
+    console.error('Error al validar URL:', error);
+    alert('No se puede abrir esta página.');
+    return;
+  }
 
-    // Actualizar texto del botón "Todas"
-    const todasSeleccionadas = Array.from(subcategoriaBotones).every(b =>
-      b.classList.contains('subcategoria-activa')
-    );
-    toggleTodasBtn.textContent = todasSeleccionadas ? 'Deseleccionar Todas' : 'Seleccionar Todas';
-
-    // ✅ Limpiar mensaje de advertencia al seleccionar algo
-    document.getElementById('mensajeFiltro').textContent = '';
-  });
+  if (noRepetirActivo) {
+    let paginasVisitadas = JSON.parse(localStorage.getItem('paginasVisitadas')) || [];
+    if (!paginasVisitadas.includes(paginaAleatoria.id)) {
+      paginasVisitadas.push(paginaAleatoria.id);
+      localStorage.setItem('paginasVisitadas', JSON.stringify(paginasVisitadas));
+      actualizarContador();
+    }
+  }
 });
 
+// ------------------- Actualizar contador -------------------
+function actualizarContador() {
+  const visitadas = JSON.parse(localStorage.getItem('paginasVisitadas')) || [];
+  contadorSpan.innerHTML = `<i class="fas fa-chart-bar"></i> ${visitadas.length} vistas`;
+}
 
-// Botón "Seleccionar/Deseleccionar Todas"
-toggleTodasBtn.addEventListener('click', () => {
-  const todasSeleccionadas = Array.from(subcategoriaBotones).every(b =>
-    b.classList.contains('subcategoria-activa')
-  );
+// ------------------- Actualizar botón aleatorio -------------------
+function actualizarBotonAleatorio() {
+  const cantidad = subcategoriasSeleccionadas.length;
 
-  subcategoriaBotones.forEach(boton => {
-    toggleSubcategoria(boton, !todasSeleccionadas);
-  });
+  if (cantidad === 0) {
+    boton.classList.remove('activo');
+    boton.classList.add('desactivado');
+    boton.innerHTML = `<i class="fas fa-random"></i> Selecciona al menos 1 subcategoria`;
 
-  toggleTodasBtn.textContent = !todasSeleccionadas ? 'Deseleccionar Todas' : 'Seleccionar Todas';
+  } else {
+    boton.classList.remove('desactivado');
+    boton.classList.add('activo');
+    boton.innerHTML = `<i class="fas fa-random"></i> Descubrir`;
+  }
+}
 
-  // ✅ Limpiar mensaje de advertencia si existía
-  document.getElementById('mensajeFiltro').textContent = '';
+boton.addEventListener('click', () => {
+  if (boton.classList.contains('desactivado')) {
+    boton.classList.add('sacudir');
+    setTimeout(() => boton.classList.remove('sacudir'), 500);
+  }
 });
 
+// ------------------- Inicializar -------------------
 inicializarSubcategorias();
