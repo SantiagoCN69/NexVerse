@@ -150,9 +150,14 @@ p {
   -webkit-tap-highlight-color: transparent;
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
 }
-#randomBtn:hover {
-  transform: scale(1.1) !important;
+#randomBtn.activo:hover {
+  transform: scale(1.1);
 }
+
+#randomBtn.inactivo {
+  transform: scale(1) !important;
+}
+
 
 /* ------------------------------------
     TEXTO FINAL INFERIOR
@@ -580,5 +585,38 @@ nav {
   transform: translateX(5px);
   background-color: rgba(255, 255, 255, 0.1);
 }
+#toggleTodas {
+  text-align: center;
+}
+
+/* ------------------------------------
+    TOAST
+------------------------------------ */
+
+.mensaje-filtro {
+  color: #f55;
+  font-size: 14px;
+  margin-top: 8px;
+  height: 1.2em;
+}
+#randomBtn.boton-error {
+  animation: sacudida-horizontal 0.3s ease !important;
+}
+#randomBtn.boton-error:hover{
+  transform: scale(1) !important;
+}
+#randomBtn.bloquear-hover:hover {
+  transform: scale(1); /* Anula el hover durante la animación */
+}
+
+
+@keyframes sacudida-horizontal {
+  0%   { transform: scale(1) translateX(0); }
+  25%  { transform: scale(1) translateX(6px); }
+  50%  { transform: scale(1) translateX(-6px); }
+  75%  { transform: scale(1) translateX(4px); }
+  100% { transform: scale(1) translateX(0); }
+}
+
 
 

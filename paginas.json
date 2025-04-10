@@ -1,11 +1,34 @@
 {
   "paginas": [
-    { "id": "1", "url": "https://...", "subcategoria": "Subcategoría A" },
-    { "id": "2", "url": "https://...", "subcategoria": "Subcategoría C" },
-    { "id": "3", "url": "https://...", "subcategoria": "Subcategoría D" },
-    { "id": "4", "url": "https://...", "subcategoria": "Subcategoría C" },
-    { "id": "5", "url": "https://...", "subcategoria": "Subcategoría A" },
-    { "id": "6", "url": "https://...", "subcategoria": "Subcategoría C" }
-
+    {
+      "id": "pag1",
+      "url": "https://ejemplo.com/a",
+      "subcategoria": "Subcategoría A"
+    },
+    {
+      "id": "pag2",
+      "url": "https://ejemplo.com/b",
+      "subcategoria": "Subcategoría B"
+    },
+    {
+      "id": "pag3",
+      "url": "https://ejemplo.com/c",
+      "subcategoria": "Subcategoría C"
+    },
+    {
+      "id": "pag4",
+      "url": "https://ejemplo.com/d",
+      "subcategoria": "Subcategoría D"
+    },
+    {
+      "id": "pag5",
+      "url": "https://ejemplo.com/e",
+      "subcategoria": "Subcategoría E"
+    },
+    {
+      "id": "pag6",
+      "url": "https://ejemplo.com/f",
+      "subcategoria": "Subcategoría F"
+    }
   ]
 }

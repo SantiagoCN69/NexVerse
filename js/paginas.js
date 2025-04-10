@@ -46,26 +46,45 @@ boton.addEventListener('click', () => {
 
   let paginasDisponibles = paginas;
 
-  if (subcategoriasSeleccionadas.length > 0) {
-    paginasDisponibles = paginasDisponibles.filter(p =>
-      subcategoriasSeleccionadas.includes(p.subcategoria)
-    );
+  // 📌 Filtrar por subcategorías seleccionadas (si hay alguna activa)
+  if (subcategoriasSeleccionadas.length === 0) {
+    const mensaje = document.getElementById('mensajeFiltro');
+    const btn = document.getElementById('randomBtn');
+  
+    mensaje.textContent = 'Por favor, selecciona al menos una subcategoría.';
+    btn.classList.remove('activo');
+    btn.classList.add('inactivo', 'boton-error');
+  
+    btn.addEventListener('animationend', () => {
+      btn.classList.remove('boton-error');
+    }, { once: true });
+  
+    return;
   }
+  
+  
+  
+
+paginasDisponibles = paginas.filter(p =>
+  subcategoriasSeleccionadas.includes(p.subcategoria)
+);
 
 
+  // 📌 Luego aplicar "No Repetir", si está activado
   if (noRepetirActivo) {
     const paginasVisitadas = JSON.parse(localStorage.getItem('paginasVisitadas')) || [];
-    paginasDisponibles = paginas.filter(p => !paginasVisitadas.includes(p.id));
+    paginasDisponibles = paginasDisponibles.filter(p => !paginasVisitadas.includes(p.id));
+  }
 
-    if (paginasDisponibles.length === 0) {
-      alert('🎉 ¡Felicidades, visitaste todas las páginas disponibles! 🎉');
-      return;
-    }
+  if (paginasDisponibles.length === 0) {
+    alert('🎉 ¡Felicidades, visitaste todas las páginas disponibles! 🎉');
+    return;
   }
 
   const paginaAleatoria = paginasDisponibles[Math.floor(Math.random() * paginasDisponibles.length)];
   window.open(paginaAleatoria.url, '_blank');
 
+  // Guardar como visitada si "No Repetir" está activo
   if (noRepetirActivo) {
     let paginasVisitadas = JSON.parse(localStorage.getItem('paginasVisitadas')) || [];
     if (!paginasVisitadas.includes(paginaAleatoria.id)) {
@@ -75,6 +94,7 @@ boton.addEventListener('click', () => {
     }
   }
 });
+
 
 // ------------------- Actualizar contador -------------------
 
@@ -87,9 +107,9 @@ function actualizarContador() {
 
 const subcategoriaBotones = document.querySelectorAll('.subcategorias-lista button');
 const toggleTodasBtn = document.getElementById('toggleTodas');
-let subcategoriasSeleccionadas = [];
+let subcategoriasSeleccionadas = JSON.parse(localStorage.getItem('subcategoriasSeleccionadas')) || [];
 
-// Función para actualizar el estado de un botón
+// Activar o desactivar subcategoría
 function toggleSubcategoria(boton, activar) {
   const subcat = boton.dataset.subcategoria;
 
@@ -102,40 +122,12 @@ function toggleSubcategoria(boton, activar) {
     subcategoriasSeleccionadas = subcategoriasSeleccionadas.filter(s => s !== subcat);
     boton.classList.remove('subcategoria-activa');
   }
+
+  localStorage.setItem('subcategoriasSeleccionadas', JSON.stringify(subcategoriasSeleccionadas));
+  actualizarEstadoCategorias();
 }
 
-// Click individual
-subcategoriaBotones.forEach(boton => {
-  boton.addEventListener('click', () => {
-    const subcat = boton.dataset.subcategoria;
-
-    if (subcategoriasSeleccionadas.includes(subcat)) {
-      toggleSubcategoria(boton, false);
-    } else {
-      toggleSubcategoria(boton, true);
-    }
-
-    // Actualizar botón de "Todas/Ninguna"
-    const todasSeleccionadas = Array.from(subcategoriaBotones).every(b =>
-      b.classList.contains('subcategoria-activa')
-    );
-    toggleTodasBtn.textContent = todasSeleccionadas ? 'Deseleccionar Todas' : 'Seleccionar Todas';
-  });
-});
-
-// Botón "Todas/Ninguna"
-toggleTodasBtn.addEventListener('click', () => {
-  const todasSeleccionadas = Array.from(subcategoriaBotones).every(b =>
-    b.classList.contains('subcategoria-activa')
-  );
-
-  subcategoriaBotones.forEach(boton => {
-    toggleSubcategoria(boton, !todasSeleccionadas);
-  });
-
-  toggleTodasBtn.textContent = !todasSeleccionadas ? 'Deseleccionar Todas' : 'Seleccionar Todas';
-});
-
+// Verificar si todas las subcategorías dentro de una categoría están activas
 function actualizarEstadoCategorias() {
   const categorias = document.querySelectorAll('.categoria-con-sub');
 
@@ -152,3 +144,65 @@ function actualizarEstadoCategorias() {
   });
 }
 
+// Inicializar subcategorías (desde localStorage o activar todas)
+function inicializarSubcategorias() {
+  if (subcategoriasSeleccionadas.length === 0) {
+    subcategoriaBotones.forEach(b => {
+      toggleSubcategoria(b, true);
+    });
+    toggleTodasBtn.textContent = 'Deseleccionar Todas';
+  } else {
+    subcategoriaBotones.forEach(b => {
+      const subcat = b.dataset.subcategoria;
+      if (subcategoriasSeleccionadas.includes(subcat)) {
+        toggleSubcategoria(b, true);
+      }
+    });
+
+    const todasSeleccionadas = Array.from(subcategoriaBotones).every(b =>
+      b.classList.contains('subcategoria-activa')
+    );
+    toggleTodasBtn.textContent = todasSeleccionadas ? 'Deseleccionar Todas' : 'Seleccionar Todas';
+  }
+}
+
+// Click individual a subcategorías
+subcategoriaBotones.forEach(boton => {
+  boton.addEventListener('click', () => {
+    const subcat = boton.dataset.subcategoria;
+
+    if (subcategoriasSeleccionadas.includes(subcat)) {
+      toggleSubcategoria(boton, false);
+    } else {
+      toggleSubcategoria(boton, true);
+    }
+
+    // Actualizar texto del botón "Todas"
+    const todasSeleccionadas = Array.from(subcategoriaBotones).every(b =>
+      b.classList.contains('subcategoria-activa')
+    );
+    toggleTodasBtn.textContent = todasSeleccionadas ? 'Deseleccionar Todas' : 'Seleccionar Todas';
+
+    // ✅ Limpiar mensaje de advertencia al seleccionar algo
+    document.getElementById('mensajeFiltro').textContent = '';
+  });
+});
+
+
+// Botón "Seleccionar/Deseleccionar Todas"
+toggleTodasBtn.addEventListener('click', () => {
+  const todasSeleccionadas = Array.from(subcategoriaBotones).every(b =>
+    b.classList.contains('subcategoria-activa')
+  );
+
+  subcategoriaBotones.forEach(boton => {
+    toggleSubcategoria(boton, !todasSeleccionadas);
+  });
+
+  toggleTodasBtn.textContent = !todasSeleccionadas ? 'Deseleccionar Todas' : 'Seleccionar Todas';
+
+  // ✅ Limpiar mensaje de advertencia si existía
+  document.getElementById('mensajeFiltro').textContent = '';
+});
+
+inicializarSubcategorias();

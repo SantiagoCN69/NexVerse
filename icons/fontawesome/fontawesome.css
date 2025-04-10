@@ -30,3 +30,5 @@
 .fa-folder-open::before { content: "\f07c"; }
 .fa-times::before { content: "\f00d"; }
 .fa-list-ul::before { content: "\f0ca"; }
+.fa-shuffle::before { content: "\f0c9"; }
+.fa-random::before { content: "\f074"; }
