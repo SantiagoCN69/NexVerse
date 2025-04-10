@@ -1,0 +1,59 @@
+
+
+aviso intalar app 
+
+
+Header moderno con:
+
+🔁 Botón "Repetir sitios / No repetir sitios"
+
+Guarda estado en localStorage.
+🔁 Botón para activar “no repetir sitios” (usa localStorage para guardar URLs visitadas).
+
+🌐 Botón "Sugerir sitio": redirige a otra página con formulario.
+
+🎧 Botón de encender/apagar sonido.
+
+📊 Contador de páginas vistas.
+
+🌓 Opción de modo claro/oscuro.
+
+🧠 Animación de carga antes de redirigir.
+
+
+Afecta la lógica de redirección aleatoria.
+
+🌐 Botón "Sugerir sitio"
+
+Redirige a otra página con un formulario simple.
+
+Formulario minimalista (otra página):
+
+input: Link de la página.
+
+input: ¿De qué trata?
+
+button: Enviar (opcionalmente puede guardarse localmente o conectarse a backend / Google Forms).
+
+Evitar sitios repetidos:
+
+Guardar en localStorage los URLs ya visitados.
+
+Si está activada la opción "No repetir sitios", filtrar los visitados.
+
+💡 Sugerencias extra:
+🎧 Botón para activar/desactivar sonido.
+
+Útil en móviles o sitios públicos.
+
+📱 Detectar si es móvil y mostrar animaciones simplificadas.
+
+🌙 Modo oscuro/claro (opcional si quieres contrastar más).
+
+📊 Contador de páginas vistas.
+
+Visual, pequeño, quizás en una esquina.
+
+🧠 Animación de carga divertida entre redirecciones.
+
+🚀 Modo aleatorio continuo: cambia solo cada 10s (con botón para pausar/reanudar).

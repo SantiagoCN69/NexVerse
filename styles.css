@@ -1,43 +1,49 @@
+/* ------------------------------------
+    RESETEO GENERAL Y FUENTE
+------------------------------------ */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  user-select: none;
 }
 
-html, body {
+html,body {
   height: 100%;
   overflow: hidden;
   font-family: 'Poppins', sans-serif;
   color: #fff;
 }
 
+/* ------------------------------------
+    FONDO DE PARTÍCULAS Y GRADIENTE
+------------------------------------ */
 canvas#particles {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   z-index: -1;
 }
 
 body::before {
   content: "";
   position: fixed;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(135deg, #1a0c0c, #112d17, #112e3a, #131238, #2b1031);
-  background-size: 1000% 1000%;
-  animation: gradientBG 20s ease infinite;
+  background: linear-gradient(135deg, #0f2027, #203a43, #772323, #5e206d, #3b0a69, #1f005c);
+  background-size: 400% 400%;
+  animation: fondoOscuro 20s ease-in-out infinite;
   z-index: -2;
   opacity: 1;
 }
 
-
-
-
-
-
+/* ------------------------------------
+    CONTENIDO PRINCIPAL
+------------------------------------ */
 main {
   display: flex;
   flex-direction: column;
@@ -59,40 +65,63 @@ p {
   color: #ccc;
 }
 
+/* ------------------------------------
+    ANIMACIONES
+------------------------------------ */
 @keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes fondoOscuro {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-@keyframes shadowPulse {
-  0%   { box-shadow: 0 0 15px #9c1f1f; }
-  25%  { box-shadow: 0 0 15px #2fb146; }
-  50%  { box-shadow: 0 0 15px #3c8fd1; }
-  75%  { box-shadow: 0 0 15px #3b38c2; }
-  100% { box-shadow: 0 0 15px #992ea3; }
-}
-
-button {
-  background: linear-gradient(135deg, #9c1f1f, #2fb146, #3c8fd1, #3b38c2, #992ea3);
-  background-size: 300% 300%;
-  animation: gradientBG 15s ease infinite, shadowPulse 5s infinite;
+/* ------------------------------------
+    BOTÓN CON GRADIENTE Y SOMBRA ANIMADA
+------------------------------------ */
+#randomBtn {
+  background: linear-gradient(
+    270deg,
+    #1f005c,
+    #3b0a69,
+    #5e206d,
+    #87207c,
+    #b83280,
+    #d74b73,
+    #e76560,
+    #f3904f,
+    #d74b73,
+    #b83280,
+    #87207c,
+    #5e206d,
+    #3b0a69,
+    #1f005c
+  );
+  background-size: 1900% 1000%;
+  animation: gradientBG 10s linear infinite;
   color: white;
   padding: 15px 30px;
   font-size: 1rem;
   border: none;
   border-radius: 30px;
   cursor: pointer;
-  box-shadow: 0 0 15px #6C63FF;
-  transition: all 0.4s ease;
-  will-change: transform, box-shadow;
+  transition: transform 0.4s ease;
+  will-change: transform;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+
 }
 
-button:hover {
+#randomBtn:hover {
   transform: scale(1.1) !important;
-  box-shadow: 0 0 25px #ffffff;
 }
 
+/* ------------------------------------
+    TEXTO FINAL INFERIOR
+------------------------------------ */
 .finaltext {
   position: absolute;
   bottom: 0;
@@ -103,4 +132,298 @@ button:hover {
   font-size: 0.8rem;
   width: 100%;
   margin: 0;
+}
+
+
+/* ------------------------------------
+    MODAL TIENES TIEMPO LIBRE
+------------------------------------ */
+#modalMensaje {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8);
+  color: white;
+  font-size: 2rem;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  text-align: center;
+  padding: 1rem;
+}
+
+
+
+/* ------------------------------------
+    MODAL DE INSTALACIÓN PWA
+------------------------------------ */
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+  border: 2px solid #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  max-width: 90%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content button {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #6200ee;
+  color: #fff;
+  cursor: pointer;
+}
+
+
+/* ------------------------------------
+    CONTADOR
+------------------------------------ */
+
+#contador {
+  font-size: 14px;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+}
+
+/* ------------------------------------
+    ICONOS
+------------------------------------ */
+#contador i {
+  margin-right: 5px; 
+  font-size: 16px;
+}
+.menu button i {
+  margin-right: 5px; 
+  font-size: 16px; 
+}
+
+.menu button:hover i {
+  color: rgba(255, 255, 255, 0.8); 
+}
+
+/* ------------------------------------
+    HEADER
+------------------------------------ */
+
+/* ----- HEADER Y NAV ----- */
+header {
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+  color: #fff;
+  backdrop-filter: blur(5px);
+  transition: height 0.3s ease, padding 0.3s ease, box-shadow 0.5s ease, backdrop-filter 0.5s ease;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  min-height: 56px;
+  padding: 1rem;
+  position: relative;
+}
+
+.menu-toggle {
+  display: none;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ----- NAV LIST ----- */
+.nav-list {
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  list-style: none;
+  gap: 16px;
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: max-height 0.6s ease, padding 0.6s ease, opacity 0.4s ease;
+}
+
+
+
+
+/* Animación rebote de items */
+.nav-list.active li {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: bounceIn 0.4s ease forwards;
+}
+
+.nav-list.active li:nth-child(1) { animation-delay: 0.05s; }
+.nav-list.active li:nth-child(2) { animation-delay: 0.1s; }
+.nav-list.active li:nth-child(3) { animation-delay: 0.15s; }
+.nav-list.active li:nth-child(4) { animation-delay: 0.2s; }
+.nav-list.active li:nth-child(5) { animation-delay: 0.3s; }
+
+/* Agrega más si tienes más ítems */
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px); /* más abajo */
+  }
+  60% {
+    transform: translateY(-8px); /* rebote hacia arriba */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+/* ----- NAV LIST ITEMS ----- */
+.nav-list li a,
+.nav-list li button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  color: white;
+  background: none;
+  border: none;
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+@media screen and (max-width: 768px) {
+  .nav-list li a,
+  .nav-list li button{
+    min-width: 140px;
+  }
+}
+.nav-list li a:hover,
+.nav-list li button:hover {
+  transform: translateX(5px);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ----- CATEGORÍAS ----- */
+.categorias-lista {
+  display: flex;
+  flex-direction: column;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  border-radius: 4px;
+  transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+  
+}
+
+.categorias-lista.active {
+  max-height: 500px;
+  opacity: 1;
+  padding: 0rem 1rem;
+  
+}
+
+.categorias-lista button {
+  background: none;
+  border: none;
+  color: white;
+  padding: 0.4rem 0;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+}
+
+/* ----- RESPONSIVE MOBILE ----- */
+@media (max-width: 768px) {
+  header {
+    backdrop-filter: blur(0);
+  }
+
+  header.menu-activo {
+    backdrop-filter: blur(30px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  nav {
+    align-items: flex-start;
+    
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .nav-list.active {
+    max-height: 500px;
+    padding: 2rem 0;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* ----- DESKTOP FIX ----- */
+@media (min-width: 769px) {
+  .nav-list {
+    flex-direction: row;
+    max-height: none;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-list.active li {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+.categorias-lista.active button {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: bounceCategoria 0.4s ease forwards;
+}
+
+.categorias-lista.active button:nth-child(1) { animation-delay: 0.05s; }
+.categorias-lista.active button:nth-child(2) { animation-delay: 0.1s; }
+.categorias-lista.active button:nth-child(3) { animation-delay: 0.15s; }
+.categorias-lista.active button:nth-child(4) { animation-delay: 0.2s; }
+/* Agrega más si tienes más opciones */
+
+@keyframes bounceCategoria {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
