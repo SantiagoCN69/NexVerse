@@ -44,12 +44,15 @@ function animateParticles() {
   ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
 
   particles.forEach(p => {
+    // Movimiento normal
     p.x += p.speedX;
     p.y += p.speedY;
 
-    if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
-    if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+    // Rebote contra los bordes
+    if (p.x <= p.radius || p.x >= canvas.width - p.radius) p.speedX *= -1;
+    if (p.y <= p.radius || p.y >= canvas.height - p.radius) p.speedY *= -1;
 
+    // Atracción o repulsión
     const dx = mouse.x - p.x;
     const dy = mouse.y - p.y;
     const distance = Math.sqrt(dx * dx + dy * dy);
@@ -68,12 +71,17 @@ function animateParticles() {
       }
     }
 
+    // Evitar que salgan del canvas (limitar posición)
+    p.x = Math.max(p.radius, Math.min(p.x, canvas.width - p.radius));
+    p.y = Math.max(p.radius, Math.min(p.y, canvas.height - p.radius));
+
+    // Dibujar partícula
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
     ctx.fill();
   });
 
-  // Mostrar el modal solo una vez cuando todas las partículas estén cerca
+  // Mostrar el modal una vez si todas están cerca del mouse
   if (!modalMostrado) {
     const todasCerca = particles.every(p => {
       const dx = mouse.x - p.x;

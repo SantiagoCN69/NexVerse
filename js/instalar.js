@@ -1,43 +1,27 @@
 let deferredPrompt;
+const instalarBtn = document.getElementById('instalarBtn');
+const instalarBtnLi = document.getElementById('instalarBtnLi');
 
-const modal = document.getElementById('modalInstalar');
-const btnInstalar = document.getElementById('btnInstalar');
-const cerrarModal = document.getElementById('cerrarModal');
-const textoModal = modal.querySelector('p');
-
-const isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
-                     window.navigator.standalone === true;
-
-const isMobileScreen = window.innerWidth <= 700;
-
-modal.style.display = (isStandalone || !isMobileScreen) ? 'none' : 'flex';
+if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+  instalarBtnLi.style.display = 'none';
+}
 
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
-  
-  if (!isStandalone && isMobileScreen) {
-    modal.style.display = 'flex';
-  }
 });
 
-btnInstalar.onclick = () => {
+instalarBtn.addEventListener('click', async () => {
   if (deferredPrompt) {
     deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(({outcome}) => {
-      if (outcome === 'accepted') {
-        localStorage.setItem('appInstalada', 'true');
-        modal.style.display = 'none';
-      }
-      deferredPrompt = null;
-    });
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+      console.log('PWA instalada');
+    } else {
+      console.log('Instalación cancelada');
+    }
+    deferredPrompt = null;
   } else {
-    textoModal.innerHTML = '✅ La app ya está instalada. Ábrela desde tu pantalla de inicio o escritorio';
-    btnInstalar.textContent = 'Entendido';
-    btnInstalar.onclick = () => modal.style.display = 'none';
+    alert('Tu navegador no permite instalar esta app o ya la tienes instalada.');
   }
-};
-
-cerrarModal.addEventListener('click', () => {
-  modal.style.display = 'none';
 });

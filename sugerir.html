@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sugerir Sitio - Páginas Randoms</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        :root {
+            --texto: #fff;
+            --texto-opaco: rgba(255, 255, 255, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            color: var(--texto);
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #0f2027, #203a43, #772323, #942a0f, #5c2e1e);
+            background-size: 400% 400%;
+            animation: fondo 20s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        body.claro::before {
+            background: linear-gradient(90deg, #ffbe5b, #5db6ff, #ff6884, #ffbc6a, #ea72ff);
+            background-size: 400% 400%;
+            animation: fondo 20s ease-in-out infinite;
+        }
+
+        @keyframes fondo {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--texto);
+        }
+
+        .form-group input, 
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--texto);
+            outline: none;
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            max-height: 200px;
+        }
+        
+        .form-group input:focus, 
+        .form-group textarea:focus,
+        .form-group select:focus {
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .form-group ::placeholder {
+            color: var(--texto-opaco);
+            opacity: 0.7;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(270deg, #0f2027, #203a43, #772323, #5c2e1e);
+            background-size: 400% 400%;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            animation: gradientBG 10s ease infinite;
+            outline: none;
+        }
+
+        .submit-btn:focus {
+            outline: none;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.02);
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .volver-link {
+            text-align: right;
+            margin-top: 1rem;
+            color: var(--texto-opaco);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: absolute;
+            right: 2rem;
+            bottom: -2rem;
+            display: inline-block;
+        }
+
+        .volver-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -3px;
+            left: 0;
+            background-color: var(--texto);
+            transition: width 0.3s ease;
+        }
+
+        .volver-link:hover {
+            color: var(--texto);
+        }
+
+        .volver-link:hover::after {
+            width: 100%;
+        }
+
+        body.claro {
+            --texto: #222;
+            --texto-opaco: rgba(0, 0, 0, 0.6);
+        }
+
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+    </style>
+    <script src="https://formspree.io/js/formspree-form.js"></script>
+</head>
+<body>
+    <div class="form-container">
+        <form 
+            action="https://formspree.io/f/xrbprpwg" 
+            method="POST" 
+            id="sugerirForm"
+            data-formspree-response-type="json"
+        >
+            <div class="form-group">
+                <label for="categoria">Categoría del Sitio Web</label>
+                <select id="categoria" name="categoria" required>
+                    <option value="">Selecciona una categoría</option>
+                    <option value="entretenimiento">Entretenimiento</option>
+                    <option value="educacion">Educación</option>
+                    <option value="tecnologia">Tecnología</option>
+                    <option value="noticias">Noticias</option>
+                    <option value="juegos">Juegos</option>
+                    <option value="arte">Arte</option>
+                    <option value="otros">Otros</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="link">Enlace del Sitio Web</label>
+                <input type="url" id="link" name="link" placeholder="https://ejemplo.com" required>
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripción del Sitio</label>
+                <textarea id="descripcion" name="descripcion" rows="4" placeholder="Describe brevemente el sitio web..." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane"></i> Enviar Sugerencia
+            </button>
+        </form>
+        <a href="index.html" class="volver-link">
+            <i class="fas fa-arrow-left"></i> Volver al Inicio
+        </a>
+    </div>
+
+    <canvas id="particles"></canvas>
+
+    <script src="js/fondo.js"></script>
+    <script>
+        // Modo claro/oscuro persistente
+        const body = document.body;
+        const preferenciaModo = localStorage.getItem('modo') || 'oscuro';
+        if (preferenciaModo === 'claro') {
+            body.classList.add('claro');
+        }
+
+        // Formspree form handling
+        const form = document.getElementById('sugerirForm');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    alert('¡Tu sugerencia ha sido enviada!');
+                    form.reset();
+                } else {
+                    alert('Hubo un problema al enviar el formulario. Inténtalo de nuevo.');
+                }
+            }).catch(error => {
+                alert('Hubo un error al enviar el formulario.');
+            });
+        });
+    </script>
+</body>
+</html>

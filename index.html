@@ -22,8 +22,8 @@
   <link rel="icon" href="/icons/icon-512.png" type="image/png">
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="icons/fontawesome/fontawesome.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
 
   <!-- Service Worker -->
   <script>
@@ -33,52 +33,63 @@
         .catch(err => console.error("SW Error:", err));
     }
   </script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
   <canvas id="particles"></canvas>
 
   <header>
     <nav>
-      <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+      <button class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <ul class="nav-list left" id="navList">
         <li>
-          <button id="toggleCategoria"><i class="fas fa-th-list"></i> Categorías</button>
+          <button id="toggleCategoria" class="navBoton"><i class="fas fa-list-ul"></i> Categorías</button>
           <div class="categorias-lista" id="categoriasLista">
-            <button>Categoría 1</button>
-            <button>Categoría 2</button>
-            <button>Categoría 3</button>
-            <button>Categoría 4</button>
+            <button id="toggleTodas" class="toggle-todas">Seleccionar Todas</button>
+          
+            <div class="categoria-con-sub">
+              <button class="categoria-btn"><i class="fas fa-folder"></i> Categoría 1</button>
+              <div class="subcategorias-lista">
+                <button data-subcategoria="Subcategoría A">Subcategoría A</button>
+                <button data-subcategoria="Subcategoría B">Subcategoría B</button>
+                <button data-subcategoria="Subcategoría C">Subcategoría C</button>
+              </div>
+            </div>
+          
+            <div class="categoria-con-sub">
+              <button class="categoria-btn"><i class="fas fa-folder"></i> Categoría 2</button>
+              <div class="subcategorias-lista">
+                <button data-subcategoria="Subcategoría D">Subcategoría D</button>
+                <button data-subcategoria="Subcategoría E">Subcategoría E</button>
+                <button data-subcategoria="Subcategoría F">Subcategoría F</button>
+              </div>
+            </div>
+          
+            <!-- Puedes seguir con más categorías -->
           </div>
         </li>
-        <li><button id="toggleRepeat"><i class="fas fa-sync-alt"></i> No Repetir</button></li>
-        <li><button id="toggleSonido"><i class="fas fa-headphones"></i> Sonido: ON</button></li>
-        <li><button id="toggleModo"><i class="fas fa-moon"></i> Modo oscuro</button></li>
-        <li><button id="sugerirSitio"><i class="fas fa-globe"></i> Sugerir sitio</button></li>
+        <li><button id="noRepetirBtn" class="navBoton"><i class="fas fa-sync-alt"></i>Si repetir</button></li>
+        <li><button id="sonidoBtn" class="navBoton"><i class="fas fa-headphones"></i>Sonido: ON</button></li>
+        <li><button id="modoBtn" class="navBoton"><i class="fas fa-moon"></i> Modo Claro</button></li>
+        <li id="instalarBtnLi"><button id="instalarBtn" class="navBoton"><i class="fas fa-cloud-download-alt"></i> Instalar APP</button></li>
+        <li><button id="sugerirBtn" class="navBoton"><i class="fas fa-globe"></i> Sugerir sitio</button></li>
       </ul>
     </nav>
   </header>
   
-
   <span id="contador"><i class="fas fa-chart-bar"></i> 0 vistas</span>
 
   <main>
-    <h1 data-aos="fade-down">Páginas Randoms</h1>
-    <p data-aos="fade-up">Haz clic y viaja a lo desconocido ✨</p>
-    <button id="randomBtn" data-aos="zoom-in">Ir ahora</button>
+    <h1>Páginas Randoms</h1>
+    <p>Haz clic y viaja a lo desconocido ✨</p>
+    <button id="randomBtn">Ir ahora</button>
   </main>
 
   <p class="finaltext">Desarrollado por Santiago Cardona 😼</p>
 
-
-  <div id="modalInstalar" class="modal">
-    <div class="modal-content">
-      <p>📱 Instala esta app para tenerla siempre a mano en tu pantalla principal</p>
-      <button id="btnInstalar">Instalar</button>
-      <button id="cerrarModal">Cerrar</button>
-    </div>
-  </div>
-  
   <div id="modalMensaje" class="modal">
     <div class="modal-content">
       <p>¡Tienes bastante tiempo libre! 🎉</p>
@@ -87,9 +98,7 @@
   </div>
 
   <!-- Scripts -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="js/fondo.js"></script>
-  <script>AOS.init();</script>
   <script src="js/paginas.js"></script>
   <script src="js/instalar.js"></script>
   <script src="js/header.js"></script>

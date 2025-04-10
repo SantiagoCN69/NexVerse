@@ -1,18 +1,25 @@
 /* ------------------------------------
     RESETEO GENERAL Y FUENTE
 ------------------------------------ */
+:root {
+  --texto: #fff; 
+  --texto-opaco: rgba(255, 255, 255, 0.5); 
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   user-select: none;
+  
+  font-family: 'Poppins', sans-serif;
 }
 
 html,body {
   height: 100%;
   overflow: hidden;
   font-family: 'Poppins', sans-serif;
-  color: #fff;
+  color: var(--texto);
 }
 
 /* ------------------------------------
@@ -34,9 +41,24 @@ body::before {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(135deg, #0f2027, #203a43, #772323, #5e206d, #3b0a69, #1f005c);
+  background: -webkit-linear-gradient(90deg, #0f2027,#203a43,#772323,#942a0f,#5c2e1e, #6d0f29);
+  background: linear-gradient(90deg, #105775,#203a43,#772323,#c13512,#5c2e1e, #6d0f29);                                                                                         
   background-size: 400% 400%;
-  animation: fondoOscuro 20s ease-in-out infinite;
+  animation: fondo 20s ease-in-out infinite;
+  z-index: -2;
+  opacity: 1;
+}
+body.claro::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: -webkit-linear-gradient(90deg, #ffbe5b, #5db6ff, #ff6884, #ffbc6a, #ea72ff);
+  background: linear-gradient(90deg, #ffbe5b, #5db6ff, #ff6884, #ffbc6a, #ea72ff);
+  background-size: 300% 300%;
+  animation: fondo 20s ease-in-out infinite;
   z-index: -2;
   opacity: 1;
 }
@@ -62,7 +84,7 @@ h1 {
 p {
   font-size: 1.2rem;
   margin-bottom: 30px;
-  color: #ccc;
+  color: var(--texto-opaco);
 }
 
 /* ------------------------------------
@@ -70,39 +92,27 @@ p {
 ------------------------------------ */
 @keyframes gradientBG {
   0%   { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%;}
 }
 
-@keyframes fondoOscuro {
+@keyframes fondo {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
+
 /* ------------------------------------
     BOTÓN CON GRADIENTE Y SOMBRA ANIMADA
 ------------------------------------ */
 #randomBtn {
-  background: linear-gradient(
-    270deg,
-    #1f005c,
-    #3b0a69,
-    #5e206d,
-    #87207c,
-    #b83280,
-    #d74b73,
-    #e76560,
-    #f3904f,
-    #d74b73,
-    #b83280,
-    #87207c,
-    #5e206d,
-    #3b0a69,
-    #1f005c
-  );
-  background-size: 1900% 1000%;
-  animation: gradientBG 10s linear infinite;
-  color: white;
+  background: linear-gradient(#6a2c2c, #1f705f, #7a4e5f, #9e3d5e, #8d2b13, #5f1472);
+
+
+  background-size: 400% 400%;
+  animation: gradientBG 20s linear infinite;
+  color: var(--texto);
   padding: 15px 30px;
   font-size: 1rem;
   border: none;
@@ -112,9 +122,34 @@ p {
   will-change: transform;
   -webkit-tap-highlight-color: transparent;
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
-
 }
-
+#randomBtn.claro {
+  background: linear-gradient(
+    270deg,
+    #ffe600,
+    #ffcf33,
+    #ff964c,
+    #ff2a68,
+    #ff7f7f,
+    #ffb3b3,
+    #b3ffff,
+    #80e5ff,
+    #4da3ff,
+    #00b0ff
+  );
+  background-size: 1900% 1000%;
+  animation: gradientBG 20s linear infinite;
+  color: var(--texto);
+  padding: 15px 30px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+  will-change: transform;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+}
 #randomBtn:hover {
   transform: scale(1.1) !important;
 }
@@ -128,7 +163,7 @@ p {
   right: 0;
   text-align: right;
   padding: 10px;
-  color: #888;
+  color: var(--texto-opaco);
   font-size: 0.8rem;
   width: 100%;
   margin: 0;
@@ -143,7 +178,7 @@ p {
   top: 0; left: 0;
   width: 100%; height: 100%;
   background: rgba(0,0,0,0.8);
-  color: white;
+  color: #eee;
   font-size: 2rem;
   justify-content: center;
   align-items: center;
@@ -179,7 +214,9 @@ p {
   max-width: 90%;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
-
+.modal-content p {
+  color: #ddd;
+}
 .modal-content button {
   margin: 0.5rem;
   padding: 0.5rem 1rem;
@@ -196,11 +233,12 @@ p {
 ------------------------------------ */
 
 #contador {
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   font-size: 14px;
   position: absolute;
   bottom: 10px;
   left: 10px;
-  color: white;
+  color: var(--texto);
 }
 
 /* ------------------------------------
@@ -210,14 +248,63 @@ p {
   margin-right: 5px; 
   font-size: 16px;
 }
-.menu button i {
+.menu button i,
+.menu a i {
   margin-right: 5px; 
   font-size: 16px; 
 }
 
-.menu button:hover i {
+.menu button:hover i,
+.menu a:hover i {
   color: rgba(255, 255, 255, 0.8); 
 }
+@keyframes girar {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.girar {
+  animation: girar 0.6s ease;
+}
+@keyframes pulso {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.pulso {
+  animation: pulso 0.4s ease;
+}
+@keyframes girarRebote {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.girar-rebote {
+  animation: girarRebote 0.4s ease;
+}
+@keyframes bounceGiro {
+  0% { transform: rotate(0deg) translateY(0); }
+  30% { transform: rotate(15deg) translateY(3px); }
+  60% { transform: rotate(-10deg) translateY(-2px); }
+  100% { transform: rotate(0deg) translateY(0); }
+}
+
+.bounce-giro {
+  animation: bounceGiro 0.4s ease;
+}
+@keyframes reboteGlobo {
+  0% { transform: rotate(0deg) scale(1); }
+  40% { transform: rotate(5deg) scale(1.15); }
+  70% { transform: rotate(-3deg) scale(1.05); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+.rebote-globo {
+  animation: reboteGlobo 0.4s ease;
+}
+
 
 /* ------------------------------------
     HEADER
@@ -229,10 +316,12 @@ header {
   width: 100%;
   z-index: 10;
   color: #fff;
-  backdrop-filter: blur(5px);
   transition: height 0.3s ease, padding 0.3s ease, box-shadow 0.5s ease, backdrop-filter 0.5s ease;
 }
-
+header.menu-activo {
+  backdrop-filter: blur(30px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
 nav {
   display: flex;
   flex-direction: column;
@@ -241,17 +330,63 @@ nav {
   position: relative;
 }
 
+
 .menu-toggle {
   display: none;
+  width: 30px;
+  height: 20px;
   position: absolute;
   top: 1rem;
   right: 1rem;
+  cursor: pointer;
   background: none;
   border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
+  z-index: 1000;
   -webkit-tap-highlight-color: transparent;
+}
+
+.menu-toggle span {
+  border-radius: 3px;
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: var(--texto);
+  position: absolute;
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.menu-toggle span:nth-child(1) {
+  top: 0;
+}
+
+.menu-toggle span:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.menu-toggle span:nth-child(3) {
+  bottom: 0;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  bottom: 50%;
+  transform: translateY(50%) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
 }
 
 /* ----- NAV LIST ----- */
@@ -261,15 +396,12 @@ nav {
   flex-direction: column;
   justify-content: center;
   list-style: none;
-  gap: 16px;
+  gap: 35px;
   max-height: 0;
   opacity: 0;
   pointer-events: none;
-  transition: max-height 0.6s ease, padding 0.6s ease, opacity 0.4s ease;
+  transition: max-height 0.5s ease, padding 0.5s ease, opacity 0.4s ease;
 }
-
-
-
 
 /* Animación rebote de items */
 .nav-list.active li {
@@ -283,16 +415,15 @@ nav {
 .nav-list.active li:nth-child(3) { animation-delay: 0.15s; }
 .nav-list.active li:nth-child(4) { animation-delay: 0.2s; }
 .nav-list.active li:nth-child(5) { animation-delay: 0.3s; }
-
-/* Agrega más si tienes más ítems */
+.nav-list.active li:nth-child(6) { animation-delay: 0.4s; }
 
 @keyframes bounceIn {
   0% {
     opacity: 0;
-    transform: translateY(20px); /* más abajo */
+    transform: translateY(20px); 
   }
   60% {
-    transform: translateY(-8px); /* rebote hacia arriba */
+    transform: translateY(-8px); 
   }
   100% {
     opacity: 1;
@@ -300,32 +431,34 @@ nav {
   }
 }
 
-
-
 /* ----- NAV LIST ITEMS ----- */
 .nav-list li a,
 .nav-list li button {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   padding: 0.5rem;
-  color: white;
+  color: var(--texto);
   background: none;
   border: none;
-  font: inherit;
   text-align: left;
   text-decoration: none;
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease;
+  min-width: 125px;
 }
 @media screen and (max-width: 768px) {
   .nav-list li a,
   .nav-list li button{
-    min-width: 140px;
+    min-width: 150px;
   }
 }
 .nav-list li a:hover,
 .nav-list li button:hover {
+  transform: translateY(5px);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.nav-list .categorias-lista button:hover {
   transform: translateX(5px);
   background-color: rgba(255, 255, 255, 0.1);
 }
@@ -335,40 +468,46 @@ nav {
   display: flex;
   flex-direction: column;
   max-height: 0;
-  overflow: hidden;
+  max-width: 100px;
   opacity: 0;
   border-radius: 4px;
-  transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+  transition:max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
   
 }
 
 .categorias-lista.active {
-  max-height: 500px;
+  max-width: 0px;
+  max-height: 400px;
   opacity: 1;
-  padding: 0rem 1rem;
-  
+  padding: 0.2rem 0 0.2rem 1rem;
 }
 
 .categorias-lista button {
+  min-width: 150px;
   background: none;
   border: none;
-  color: white;
+  color: var(--texto);
   padding: 0.4rem 0;
   text-align: left;
   cursor: pointer;
-  transition: all 0.3s ease;
-  
 }
 
+#instalarBtnLi {
+  display: none;
+}
 /* ----- RESPONSIVE MOBILE ----- */
 @media (max-width: 768px) {
+  .nav-list li a:hover,
+.nav-list li button:hover {
+  transform: translateX(5px);
+  background-color: rgba(255, 255, 255, 0.1);
+}
   header {
     backdrop-filter: blur(0);
   }
 
-  header.menu-activo {
-    backdrop-filter: blur(30px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  #instalarBtnLi {
+    display: block;
   }
 
   nav {
@@ -384,10 +523,11 @@ nav {
     flex-direction: column;
     opacity: 0;
     pointer-events: none;
+    gap: 20px;
   }
 
   .nav-list.active {
-    max-height: 500px;
+    max-height: 1000px;
     padding: 2rem 0;
     opacity: 1;
     pointer-events: auto;
@@ -409,21 +549,36 @@ nav {
     transform: none;
   }
 }
-.categorias-lista.active button {
+
+/* ----- SUBCATEGORÍAS ----- */
+.categoria-con-sub {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Subcategorías animadas como categorías */
+.subcategorias-lista {
+  pointer-events: none;
+  max-height: 0;
   opacity: 0;
-  transform: translateY(10px);
-  animation: bounceCategoria 0.4s ease forwards;
+  padding: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
 }
 
-.categorias-lista.active button:nth-child(1) { animation-delay: 0.05s; }
-.categorias-lista.active button:nth-child(2) { animation-delay: 0.1s; }
-.categorias-lista.active button:nth-child(3) { animation-delay: 0.15s; }
-.categorias-lista.active button:nth-child(4) { animation-delay: 0.2s; }
-/* Agrega más si tienes más opciones */
-
-@keyframes bounceCategoria {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.subcategorias-lista.active {
+  pointer-events: all;
+  max-height: 500px;
+  opacity: 1;
+  padding: 0.2rem 1rem;
+  transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
 }
+
+
+.categoria-btn.categoria-activa,
+.subcategorias-lista button.subcategoria-activa,
+.subcategorias-lista button:hover {
+  transform: translateX(5px);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
