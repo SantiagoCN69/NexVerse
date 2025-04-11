@@ -350,18 +350,15 @@ nav {
 .categorias-lista {
   display: flex;
   flex-direction: column;
+  gap: 1px;
   max-height: 0;
   max-width: 0;
   opacity: 0;
   border-radius: 4px;
   pointer-events: none;
-  transition:max-height .3s ease, opacity .3s ease, padding .2s linear;
 }
 
 .categorias-lista.active {
-  pointer-events: all;
-  max-height: 400px;
-  opacity: 1;
   padding: 0.2rem 0 0.2rem 1rem;
 }
 
@@ -384,24 +381,28 @@ nav {
 
 /* ----- SUBCATEGORÍAS ----- */
 
-
-/* Subcategorías animadas como categorías */
+.subcategorias-lista,
+.categorias-lista {
+  transition: max-height .3s ease, opacity .3s ease, padding .2s ease;
+}
 .subcategorias-lista {
   pointer-events: none;
   max-height: 0;
   opacity: 0;
   padding: 0;
-  transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
 }
 
 .subcategorias-lista.active {
+  padding: 2px 0 1px 1rem;
+}
+.active {
   pointer-events: all;
   max-height: 600px;
   opacity: 1;
-  padding: 0.2rem 0 0 1rem;
-  transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
 }
-
 @media (hover: hover) {
   .subcategorias-lista button:hover, .categorias-lista button:hover {
   transform: translateX(5px);
