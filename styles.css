@@ -419,6 +419,28 @@ nav {
     backdrop-filter: blur(30px);
     box-shadow: 0 4px 10px #00000070;
   }
+  nav {
+    max-height: 100vh;
+    overflow: auto;
+  }
+  nav::-webkit-scrollbar {
+    width: 6px; 
+  }
+  
+  nav::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+  
+  nav::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2); 
+    border-radius: 4px; 
+  }
+  
+  /* Firefox */
+  nav {
+    scrollbar-width: thin; 
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent; 
+  }
   .nav-list {
     flex-direction: column;
     opacity: 0;

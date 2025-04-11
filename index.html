@@ -25,23 +25,19 @@
   <link rel="stylesheet" href="icons/fontawesome/fontawesome-subset.css" />
 
 
- <script>
-    navigator.serviceWorker.register("/sw.js")
-        .then(() => console.log("Service Worker registrado"))
-       .catch(err => console.error("SW Error:", err));
- </script> 
 
 </head>
 <body>
   <canvas id="particles"></canvas>
 
   <header>
+    <button class="menu-toggle" id="menuToggle" aria-label="Alternar menú de navegación" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <nav>
-      <button class="menu-toggle" id="menuToggle" aria-label="Alternar menú de navegación" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+
       <ul class="nav-list" id="navList" aria-label="Menú de navegación">
         <li>
           <button id="toggleCategoria" class="navBoton" aria-label="Mostrar categorías">
