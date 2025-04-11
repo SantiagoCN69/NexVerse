@@ -53,8 +53,14 @@ toggleTodasBtn.addEventListener('click', () => {
   
   
   function inicializarSubcategorias() {
-    const guardadas = JSON.parse(localStorage.getItem('subcategoriasSeleccionadas')) || [];
+    let guardadas = JSON.parse(localStorage.getItem('subcategoriasSeleccionadas')) || [];
+
+    const subcategoriasHTML = Array.from(subcategoriaBotones).map(b => b.dataset.subcategoria);
+    guardadas = guardadas.filter(sub => subcategoriasHTML.includes(sub));
+  
     subcategoriasSeleccionadas = guardadas;
+
+    localStorage.setItem('subcategoriasSeleccionadas', JSON.stringify(subcategoriasSeleccionadas));
   
     if (guardadas.length === 0) {
       const primeraCategoria = document.querySelector('.categoria-con-sub');
@@ -75,8 +81,6 @@ toggleTodasBtn.addEventListener('click', () => {
     actualizarBotonAleatorio();
     actualizarContadorCategorias();
   }
-  
-  
   
 
 // Exportar globalmente para que otros scripts lo llamen
@@ -107,36 +111,30 @@ function actualizarContadorCategorias() {
 
 // Inicializar al cargar
 inicializarSubcategorias();
-// Manejar apertura de subcategorías
+
+// Manejar apertura de subcategorías (permite múltiples abiertas)
 document.querySelectorAll('.categoria-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const subcategoriaLista = e.currentTarget.nextElementSibling;
-      const iconElement = e.currentTarget.querySelector('i');
-  
-      // Cerrar todas las demás subcategorías
-      document.querySelectorAll('.subcategorias-lista').forEach(sub => {
-        if (sub !== subcategoriaLista) sub.classList.remove('active');
-      });
-      document.querySelectorAll('.categoria-btn i').forEach(icon => {
-        if (icon !== iconElement) icon.classList.remove('fa-folder-open');
-      });
-  
-      // Toggle la subcategoría clickeada
-      if (subcategoriaLista) {
-        subcategoriaLista.classList.toggle('active');
-        iconElement.classList.toggle('fa-folder-open');
-      }
-  
-      if (window.actualizarContadorCategorias) {
-        window.actualizarContadorCategorias();
-      }
-  
-      const header = document.querySelector("header");
-      const hayActivos = [...document.querySelectorAll('.subcategorias-lista')]
-        .some(el => el.classList.contains("active"));
-      header.classList.toggle("active", hayActivos);
-    });
+  btn.addEventListener('click', (e) => {
+    const subcategoriaLista = e.currentTarget.nextElementSibling;
+    const iconElement = e.currentTarget.querySelector('i');
+
+    // Toggle la subcategoría clickeada
+    if (subcategoriaLista) {
+      subcategoriaLista.classList.toggle('active');
+      iconElement.classList.toggle('fa-folder-open');
+    }
+
+    if (window.actualizarContadorCategorias) {
+      window.actualizarContadorCategorias();
+    }
+
+    const header = document.querySelector("header");
+    const hayActivos = [...document.querySelectorAll('.subcategorias-lista')]
+      .some(el => el.classList.contains("active"));
+    header.classList.toggle("active", hayActivos);
   });
+});
+
   
 // Ocultar contador si haces clic fuera del header o redimensionas
 document.addEventListener('click', (e) => {

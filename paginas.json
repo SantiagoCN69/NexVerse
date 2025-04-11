@@ -1,34 +1,294 @@
 {
-  "paginas": [
+  "categorias": [
     {
-      "id": "pag1",
-      "url": "hhhh",
-      "subcategoria": "Subcategoría A"
-    },
-    {
-      "id": "pag2",
-      "url": "hhhh",
-      "subcategoria": "Subcategoría B"
-    },
-    {
-      "id": "pag3",
-      "url": "hhhh",
-      "subcategoria": "Subcategoría C"
-    },
-    {
-      "id": "pag4",
-      "url": "hhhh",
-      "subcategoria": "Subcategoría D"
-    },
-    {
-      "id": "pag5",
-      "url": "hhhh",
-      "subcategoria": "Subcategoría E"
-    },
-    {
-      "id": "pag6",
-      "url": "hhhh",
-      "subcategoria": "Subcategoría F"
+      "nombre": "Diversion",
+      "subcategorias": [
+        {
+          "nombre": "Humor y Absurdo",
+          "paginas": [
+            {
+              "id": "p1",
+              "titulo": "Awkward Family Photos",
+              "url": "http://awkwardfamilyphotos.com/"
+            },
+            {
+              "id": "p2",
+              "titulo": "The Coding Love",
+              "url": "http://thecodinglove.com/"
+            },
+            {
+              "id": "p3",
+              "titulo": "Eel Slap",
+              "url": "https://eelslap.com/"
+            },
+            {
+              "id": "p4",
+              "titulo": "Heeeeeeeey",
+              "url": "https://heeeeeeeey.com/"
+            },
+            {
+              "id": "p5",
+              "titulo": "Weird or Confusing",
+              "url": "https://weirdorconfusing.com/"
+            },
+            {
+              "id": "p6",
+              "titulo": "Cat Bounce",
+              "url": "http://cat-bounce.com/"
+            },
+            {
+              "id": "p7",
+              "titulo": "Staggering Beauty",
+              "url": "http://www.staggeringbeauty.com/"
+            },
+            {
+              "id": "p8",
+              "titulo": "Koalas to the Max",
+              "url": "http://www.koalastothemax.com/"
+            },
+            {
+              "id": "p9",
+              "titulo": "Corndog.io",
+              "url": "http://corndog.io/"
+            },
+            {
+              "id": "p10",
+              "titulo": "Sometimes Red Sometimes Blue",
+              "url": "http://sometimesredsometimesblue.com/"
+            },
+            {
+              "id": "p11",
+              "titulo": "Bees Bees Bees",
+              "url": "https://beesbeesbees.com/"
+            },
+            {
+              "id": "p12",
+              "titulo": "Corgi Orgy",
+              "url": "https://corgiorgy.com/"
+            },
+            {
+              "id": "p13",
+              "titulo": "I Am Awesome",
+              "url": "http://www.iamawesome.com/"
+            },
+            {
+              "id": "p14",
+              "titulo": "Zombo",
+              "url": "http://www.zombo.com/"
+            },
+            {
+              "id": "p15",
+              "titulo": "Every Day I'm",
+              "url": "http://www.everydayim.com/"
+            },
+            {
+              "id": "p16",
+              "titulo": "Much Better Than This",
+              "url": "http://www.muchbetterthanthis.com/"
+            },
+            {
+              "id": "p17",
+              "titulo": "Pug in a Rug",
+              "url": "https://puginarug.com/"
+            }
+          ]
+        },
+        {
+          "nombre": "Visual y Creativo",
+          "paginas": [
+            {
+              "id": "p18",
+              "titulo": "Falling Falling",
+              "url": "http://www.fallingfalling.com/"
+            },
+            {
+              "id": "p19",
+              "titulo": "Zoom Quilt",
+              "url": "http://zoomquilt.org/"
+            },
+            {
+              "id": "p20",
+              "titulo": "This is Sand",
+              "url": "https://thisissand.com/"
+            },
+            {
+              "id": "p21",
+              "titulo": "Chris McKenzie",
+              "url": "http://chrismckenzie.com/"
+            },
+            {
+              "id": "p22",
+              "titulo": "Quick Draw",
+              "url": "https://quickdraw.withgoogle.com/"
+            },
+            {
+              "id": "p23",
+              "titulo": "Lava Lamp",
+              "url": "https://lava.lamp.fm/"
+            }
+          ]
+        },
+        {
+          "nombre": "Juegos y Desafíos",
+          "paginas": [
+            {
+              "id": "p24",
+              "titulo": "Pointer Pointer",
+              "url": "https://pointerpointer.com/"
+            },
+            {
+              "id": "p26",
+              "titulo": "Long Doge Challenge",
+              "url": "http://longdogechallenge.com/"
+            },
+            {
+              "id": "p27",
+              "titulo": "Try Pap",
+              "url": "https://trypap.com/"
+            },
+            {
+              "id": "p28",
+              "titulo": "The Evolution of Trust",
+              "url": "https://ncase.me/trust/"
+            },
+            {
+              "id": "p29",
+              "titulo": "Infinite Craft",
+              "url": "https://neal.fun/infinite-craft/"
+            },
+            {
+              "id": "p30",
+              "titulo": "Absurd Trolley Problems",
+              "url": "https://neal.fun/absurd-trolley-problems/"
+            },
+            {
+              "id": "p31",
+              "titulo": "Draw Perfect Circles",
+              "url": "https://neal.fun/draw-perfect-circles/"
+            },
+            {
+              "id": "p32",
+              "titulo": "Find the Invisible Cow",
+              "url": "https://findtheinvisiblecow.com/"
+            },
+            {
+              "id": "p33",
+              "titulo": "Bouncy Balls",
+              "url": "https://bouncyballs.org/"
+            }
+          ]
+        },
+        {
+          "nombre": "Temporizadores",
+          "paginas": [
+            {
+              "id": "p34",
+              "titulo": "Is It Christmas?",
+              "url": "http://isitchristmas.com/"
+            },
+            {
+              "id": "p35",
+              "titulo": "Is It Time for a Break?",
+              "url": "http://isitimeforabreak.com/"
+            },
+            {
+              "id": "p36",
+              "titulo": "Patience Is a Virtue",
+              "url": "http://www.patience-is-a-virtue.org/"
+            },
+            {
+              "id": "p37",
+              "titulo": "Do Nothing for 2 Minutes",
+              "url": "http://www.donothingfor2minutes.com/"
+            }
+          ]
+        },
+        {
+          "nombre": "Audio y Ambiente",
+          "paginas": [
+            {
+              "id": "p38",
+              "titulo": "Radio Garden",
+              "url": "https://radio.garden/"
+            },
+            {
+              "id": "p39",
+              "titulo": "A Soft Murmur",
+              "url": "https://asoftmurmur.com/"
+            }
+          ]
+        },
+        {
+          "nombre": "Bromas",
+          "paginas": [
+            {
+              "id": "p41",
+              "titulo": "Hacker Typer",
+              "url": "http://hackertyper.com/"
+            },
+            {
+              "id": "p42",
+              "titulo": "Fake Virus",
+              "url": "https://geekprank.com/fake-virus/"
+            },
+            {
+              "id": "p43",
+              "titulo": "Is My Computer On?",
+              "url": "http://www.ismycomputeron.com/"
+            }
+          ]
+        },
+        {
+          "nombre": "Curiosidades",
+          "paginas": [
+            {
+              "id": "p44",
+              "titulo": "Days of the Year",
+              "url": "https://www.daysoftheyear.com/"
+            },
+            {
+              "id": "p45",
+              "titulo": "How Many People Are in Space Right Now?",
+              "url": "http://www.howmanypeopleareinspacerightnow.com/"
+            },
+            {
+              "id": "p46",
+              "titulo": "Where is Roadster?",
+              "url": "https://whereisroadster.com/"
+            },
+            {
+              "id": "p47",
+              "titulo": "Ten Cents",
+              "url": "http://tencents.info/"
+            }
+          ]
+        },
+        {
+          "nombre": "Aleatoriedad",
+          "paginas": [
+            {
+              "id": "p49",
+              "titulo": "Endless Horse",
+              "url": "http://endless.horse/"
+            },
+            {
+              "id": "p50",
+              "titulo": "Republique des Mangues",
+              "url": "http://www.republiquedesmangues.fr/"
+            },
+            {
+              "id": "p51",
+              "titulo": "r33b",
+              "url": "http://r33b.net/"
+            },
+            {
+              "id": "p52",
+              "titulo": "Move Now Think Later",
+              "url": "http://www.movenowthinklater.com/"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

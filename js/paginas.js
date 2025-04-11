@@ -10,10 +10,23 @@ let noRepetirActivo = localStorage.getItem('noRepetirActivo') === 'true';
 fetch('paginas.json')
   .then(res => res.json())
   .then(data => {
-    paginas = data.paginas;
+    paginas = [];
+
+    data.categorias.forEach(categoria => {
+      categoria.subcategorias.forEach(sub => {
+        sub.paginas.forEach(p => {
+          paginas.push({
+            ...p,
+            subcategoria: sub.nombre
+          });
+        });
+      });
+    });
+
     actualizarContador();
   })
-  .catch(err => console.error('Error cargando paginas:', err));
+  .catch(err => console.error('Error cargando páginas:', err));
+
 
 // ------------------- No repetir -------------------
 function actualizarNoRepetirUI() {
