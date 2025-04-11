@@ -1,4 +1,6 @@
-const CACHE_NAME = 'sitios-randoms-v1';
+const APP_VERSION = 'v1.0.3';
+const CACHE_NAME = `sitios-randoms-${APP_VERSION}`;
+
 const urlsToCache = [
   '/',
   '/index.html',
@@ -15,6 +17,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => cache.addAll(urlsToCache))
+      .then(() => self.skipWaiting()) 
   );
 });
 
@@ -28,23 +31,19 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
 });
 
 self.addEventListener('fetch', (event) => {
-  // Ignorar peticiones que no sean GET
   if (event.request.method !== 'GET') return;
 
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
-        // Si está en caché, devolver respuesta
         if (response) return response;
 
-        // Si no, hacer fetch
         return fetch(event.request).catch(() => {
-          // Si falla el fetch, devolver página offline
           return caches.match('/offline.html');
         });
       })

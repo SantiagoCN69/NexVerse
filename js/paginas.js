@@ -18,15 +18,15 @@ fetch('paginas.json')
 
 // ------------------- Botón No Repetir -------------------
 noRepetirBtn.innerHTML = noRepetirActivo
-  ? '<i class="fas fa-sync-alt"></i> No Repetir'
-  : '<i class="fas fa-sync-alt"></i> Si Repetir';
+  ? '<i class="fas fa-rotate"></i>Repetir: No'
+  : '<i class="fas fa-rotate"></i>Repetir: Si';
 
 noRepetirBtn.addEventListener('click', () => {
   noRepetirActivo = !noRepetirActivo;
   localStorage.setItem('noRepetirActivo', noRepetirActivo);
   noRepetirBtn.innerHTML = noRepetirActivo
-    ? '<i class="fas fa-sync-alt"></i> No Repetir'
-    : '<i class="fas fa-sync-alt"></i> Si Repetir';
+    ? '<i class="fas fa-rotate"></i>Repetir: No'
+    : '<i class="fas fa-rotate"></i>Repetir: Si';
 
   const icono = noRepetirBtn.querySelector('i');
   icono.classList.add('girar');
@@ -57,6 +57,7 @@ function toggleSubcategoria(boton, activar) {
   localStorage.setItem('subcategoriasSeleccionadas', JSON.stringify(subcategoriasSeleccionadas));
   actualizarEstadoCategorias();
   actualizarBotonAleatorio();
+  actualizarContadorCategorias();
 }
 
 // Verificar si todas las subcategorías dentro de una categoría están activas
@@ -86,6 +87,7 @@ toggleTodasBtn.addEventListener('click', () => {
   toggleTodasBtn.classList.toggle('activo', !todasSeleccionadas);
   mensajeFiltro.textContent = '';
   actualizarBotonAleatorio();
+  actualizarContadorCategorias();
 });
 
 // Inicializar subcategorías
@@ -106,6 +108,7 @@ function inicializarSubcategorias() {
   }
 
   actualizarBotonAleatorio();
+  actualizarContadorCategorias();
 }
 
 // Click individual
@@ -113,6 +116,38 @@ subcategoriaBotones.forEach(boton => {
   boton.addEventListener('click', () => {
     const subcat = boton.dataset.subcategoria;
     toggleSubcategoria(boton, !subcategoriasSeleccionadas.includes(subcat));
+  });
+});
+
+// ------------------- Actualizar contador de categorías -------------------
+window.actualizarContadorCategorias = function() {
+  const cantidad = subcategoriasSeleccionadas.length;
+  const toggleCategoria = document.getElementById('toggleCategoria');
+  const categoriasLista = document.getElementById('categoriasLista');
+
+  // Salir si no se encuentran los elementos necesarios
+  if (!toggleCategoria || !categoriasLista) return;
+
+  const existeSpan = toggleCategoria.querySelector('.contador-categorias');
+
+  if (categoriasLista.classList.contains('active')) {
+    if (!existeSpan) {
+      const span = document.createElement('span');
+      span.className = 'contador-categorias';
+      span.textContent = ` (${cantidad})`;
+      toggleCategoria.appendChild(span);
+    } else {
+      existeSpan.textContent = ` (${cantidad})`;
+    }
+  } else if (existeSpan) {
+    existeSpan.remove();
+  }
+};
+
+// Llamar a la función cuando se seleccionan subcategorías
+document.querySelectorAll('.categoria-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    actualizarContadorCategorias();
   });
 });
 
@@ -165,12 +200,12 @@ function actualizarBotonAleatorio() {
   if (cantidad === 0) {
     boton.classList.remove('activo');
     boton.classList.add('desactivado');
-    boton.innerHTML = `<i class="fas fa-random"></i> Selecciona al menos 1 subcategoria`;
+    boton.innerHTML = `Selecciona al menos 1 subcategoria`;
 
   } else {
     boton.classList.remove('desactivado');
     boton.classList.add('activo');
-    boton.innerHTML = `<i class="fas fa-random"></i> Descubrir`;
+    boton.innerHTML = `Descubrir`;
   }
 }
 

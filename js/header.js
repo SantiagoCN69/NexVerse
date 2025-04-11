@@ -7,7 +7,6 @@ const toggleCategoria = document.getElementById('toggleCategoria');
 const categoriasLista = document.getElementById('categoriasLista');
 const header = document.querySelector("header");
 
-
 // Modo Claro/Oscuro
 let preferenciaModo = localStorage.getItem('modo') || 'oscuro';
 
@@ -19,10 +18,12 @@ function inicializarModo() {
         modoBtn.innerHTML = '<i class="fas fa-sun"></i> Modo claro';
         document.documentElement.style.setProperty('--texto', '#222');
         document.documentElement.style.setProperty('--texto-opaco', '#22222280');
+        document.documentElement.style.setProperty('--invert', 'invert(0)');
     } else {
         modoBtn.innerHTML = '<i class="fas fa-moon"></i> Modo oscuro';
         document.documentElement.style.setProperty('--texto', '#fff');
         document.documentElement.style.setProperty('--texto-opaco', '#ffffff80');
+        document.documentElement.style.setProperty('--invert', 'invert(1)');
     }
 }
 
@@ -35,6 +36,7 @@ function cambiarModo() {
 
     document.documentElement.style.setProperty('--texto', enClaro ? '#222' : '#fff');
     document.documentElement.style.setProperty('--texto-opaco', enClaro ? '#22222280' : '#ffffff80');
+    document.documentElement.style.setProperty('--invert', enClaro ? 'invert(0)' : 'invert(1)');
 
     modoBtn.innerHTML = enClaro
     ? '<i class="fas fa-sun"></i> Modo claro'
@@ -89,44 +91,29 @@ window.addEventListener('resize', () => {
 function toggleCategoriasLista() {
     categoriasLista.classList.toggle('active');
     actualizarHeaderActivo();
-    actualizarContadorCategorias();
   
     const icono = toggleCategoria.querySelector('i');
     icono.classList.add('bounce-giro');
     icono.addEventListener('animationend', () => {
       icono.classList.remove('bounce-giro');
     }, { once: true });
-  }
-  
-  // Actualiza el estado del header si hay algo abierto
-  function actualizarHeaderActivo() {
+    
+    // Llamar a la función global para actualizar el contador
+    if (window.actualizarContadorCategorias) {
+      window.actualizarContadorCategorias();
+    }
+}
+
+// Actualiza el estado del header si hay algo abierto
+function actualizarHeaderActivo() {
     const hayActivos = categoriasLista.classList.contains("active") ||
       [...document.querySelectorAll('.subcategorias')].some(el => el.classList.contains("active"));
   
     header.classList.toggle("active", hayActivos);
-  }
-  
-  // 🔢 Actualizar contador en el botón de categorías
-  function actualizarContadorCategorias() {
-    const cantidad = subcategoriasSeleccionadas.length;
-    const existeSpan = toggleCategoria.querySelector('.contador-categorias');
-  
-    if (categoriasLista.classList.contains('active')) {
-      if (!existeSpan) {
-        const span = document.createElement('span');
-        span.className = 'contador-categorias';
-        span.textContent = ` (${cantidad})`;
-        toggleCategoria.appendChild(span);
-      } else {
-        existeSpan.textContent = ` (${cantidad})`;
-      }
-    } else if (existeSpan) {
-      existeSpan.remove();
-    }
-  }
-  
-  // Subcategorías Toggle
-  document.querySelectorAll('.categoria-btn').forEach(btn => {
+}
+
+// Subcategorías Toggle
+document.querySelectorAll('.categoria-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const subcategoriaLista = e.currentTarget.nextElementSibling;
       const iconElement = e.currentTarget.querySelector('i');
@@ -146,7 +133,7 @@ function toggleCategoriasLista() {
         subcategoriaLista.classList.toggle('active');
         iconElement.classList.toggle('fa-folder-open');
       }
-  
+      
       actualizarHeaderActivo();
     });
   });
@@ -181,7 +168,6 @@ function toggleCategoriasLista() {
     document.querySelectorAll(".subcategorias-lista").forEach(sub => sub.classList.remove("active"));
     document.querySelectorAll('.categoria-btn i').forEach(icon => icon.classList.remove('fa-folder-open'));
     header.classList.remove("active");
-    actualizarContadorCategorias();
   });
   
   // Cerrar todo al hacer clic fuera
@@ -194,7 +180,9 @@ function toggleCategoriasLista() {
       document.querySelectorAll(".subcategorias-lista").forEach(sub => sub.classList.remove("active"));
       document.querySelectorAll('.categoria-btn i').forEach(icon => icon.classList.remove('fa-folder-open'));
       header.classList.remove("active");
-      actualizarContadorCategorias();
+      if (window.actualizarContadorCategorias) {
+        window.actualizarContadorCategorias();
+      }
     }
   });
   

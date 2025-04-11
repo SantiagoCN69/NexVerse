@@ -1,25 +1,11 @@
-@font-face {
-  font-family: 'Font Awesome 5 Free';
-  font-style: normal;
-  font-weight: 900;
-  font-display: block;
-  src: url('webfonts/fa-solid-900.woff2') format('woff2');
-}
-.fas {
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 900;
-  font-style: normal;
-}
-.fa-chart-bar::before { content: "\f080"; }
-.fa-rotate::before { content: "\f021"; }
-.fa-sync-alt::before { content: "\f2f1"; }
-.fa-cloud-download-alt::before { content: "\f381"; }
-
-.fa-globe::before { content: "\f0ac"; }
-.fa-moon::before { content: "\f186"; }
-.fa-sun::before { content: "\f185"; }
-.fa-folder::before { content: "\f07b"; }
-.fa-folder-open::before { content: "\f07c"; }
-.fa-list-ul::before { content: "\f0ca"; }
-.fa-headphones::before { content: "\f025"; }
-.fa-random::before { content: "\f074"; }
+.fa-chart-bar { content: url('chart-bar-solid.svg');}
+.fa-rotate { content: url('rotate-solid.svg');}
+.fa-globe { content: url('globe-solid.svg');}
+.fa-moon { content: url('moon-solid.svg');}
+.fa-sun { content: url('sun-solid.svg');}
+.fa-folder { content: url('folder-solid.svg');}
+.fa-folder-open { content: url('folder-open-solid.svg');}
+.fa-list-ul { content: url('list-ul-solid.svg');}
+.fa-headphones { content: url('headphones-solid.svg');}
+.fa-check { content: url('check-solid.svg');}
+.fa-cloud { content: url('cloud-arrow-down-solid.svg');}

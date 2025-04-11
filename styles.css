@@ -12,9 +12,11 @@
 :root {
   --texto: #fff;
   --texto-opaco: #FFFFFF80;
+  --invert: invert(1);
 }
 
 * {
+  touch-action: manipulation;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -112,6 +114,9 @@ p {
   will-change: transform;
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
   transition: transform .3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
   }
 
 #randomBtn.activo:hover {
@@ -157,35 +162,17 @@ p {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
-/* -----------FOOTER------------------ */
-
-footer {
-  display: flex;
-  position: absolute;
-  bottom: 0;
-  padding: 10px;
-  color: var(--texto-opaco);
-  font-size: .8rem;
-  width: 100%;
-  margin: 0;
-  justify-content: space-between;
-  text-wrap: balance;
-}
-.finaltext {
-  font-size: .8rem;
-}
 
 /* -----------ICONOS------------------ */
 
-i {
-  margin-right: 5px; 
-  font-size: 16px;
-  color: var(--texto-opaco);
-  transition: color .5s ease;
-}
-
-button:hover i{
-  color: var(--texto); 
+i, .fas{
+  display: block;
+  margin-right:5px;
+  width: 16px;
+  height: 16px;
+  filter: var(--invert) ;
+  opacity: .8;
+  transition: filter 1s ease;
 }
 
 @keyframes girar {
@@ -349,14 +336,14 @@ nav {
 
 
 @media (hover: hover) {
-  .nav-list li button:hover {
-    transform: translateY(5px);
+  .navBoton:hover {
+    transform: scale(1.05);
     background-color: rgba(255, 255, 255, 0.1);
   }
 }
 .nav-list button {
-  backdrop-filter: blur(10px);
-}
+    backdrop-filter: blur(5px);
+  }
 
 /* ----- CATEGORÍAS ----- */
 
@@ -368,7 +355,7 @@ nav {
   opacity: 0;
   border-radius: 4px;
   pointer-events: none;
-  transition:max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+  transition:max-height .3s ease, opacity .3s ease, padding .2s linear;
 }
 
 .categorias-lista.active {
@@ -389,10 +376,7 @@ nav {
 #modoBtn{
   justify-content: start;
 }
-#toggleTodas {
-  justify-content: center;
-  
-}
+
 #instalarBtnLi {
   display: none;
 }
@@ -422,20 +406,13 @@ nav {
 }
 
 @media (hover: hover) {
-  .categorias-lista.active button:hover,
-  .categoria-btn.categoria-activa,
-  .subcategorias-lista button.subcategoria-activa,
-  .subcategorias-lista button:hover {
+  .subcategorias-lista button:hover, .categorias-lista button:hover {
   transform: translateX(5px);
-  background-color: rgba(255, 255, 255, 0.2);}
-
-  .categorias-lista.active button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
 }
-.categoria-btn.categoria-activa {
+}
+.categoria-activa, .subcategoria-activa {
   transform: translateX(5px);
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.2) !important;
 }
 
 /* ----- RESPONSIVE MOBILE ----- */
@@ -458,8 +435,8 @@ nav {
     max-height: 1000px;
     margin: 3rem 1rem;
   }
-  .nav-list li button:hover {
-    transform: translateX(5px);
+  button:active {
+    transform: scale(0.9);
   }
   .nav-list li button {
     justify-content: left;
@@ -473,3 +450,23 @@ nav {
     display: block;
     }
 }
+
+/* -----------FOOTER------------------ */
+
+footer {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  padding: 10px;
+  color: var(--texto-opaco);
+  width: 100%;
+  margin: 0;
+  justify-content: space-between;
+  text-wrap: balance;
+}
+.finaltext,
+#contador {
+  font-size: 0.8rem;
+  display: flex;
+}
+
