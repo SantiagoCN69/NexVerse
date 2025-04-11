@@ -62,11 +62,27 @@ function closeMenu() {
     document.querySelectorAll(".subcategorias").forEach(sub => sub.classList.remove("active"));
     document.querySelectorAll('.categoria-btn i').forEach(icon => icon.classList.remove('fa-folder-open'));
     header.classList.remove("active");
+    
+    // Asegurarse de que todas las subcategorías se cierren
+    document.querySelectorAll(".subcategorias-lista").forEach(sub => sub.classList.remove("active"));
 }
 
 function toggleMenu() {
     navList.classList.toggle('active');
     menuToggle.classList.toggle('active');
+    
+    // Si se está cerrando el menú, cerrar también categorías y subcategorías
+    if (!navList.classList.contains('active')) {
+        categoriasLista.classList.remove("active");
+        document.querySelectorAll(".subcategorias-lista").forEach(sub => sub.classList.remove("active"));
+        document.querySelectorAll('.categoria-btn i').forEach(icon => icon.classList.remove('fa-folder-open'));
+        header.classList.remove("active");
+        
+        // Actualizar el contador de categorías al cerrar el menú
+        if (window.actualizarContadorCategorias) {
+            window.actualizarContadorCategorias();
+        }
+    }
 }
 
 // Cerrar menú al hacer click fuera
