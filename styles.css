@@ -289,7 +289,7 @@ nav {
   max-height: 0;
   opacity: 1;
   pointer-events: auto;
-  transition: max-height .5s ease, padding .5s ease, opacity .5s ease, margin .5s ease;
+  transition: max-height .5s ease, padding .5s ease, opacity .3s ease, margin .5s ease;
 }
 
 /* Animación rebote de items */
