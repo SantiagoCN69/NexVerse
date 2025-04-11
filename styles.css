@@ -422,24 +422,11 @@ nav {
   nav {
     max-height: 100vh;
     overflow: auto;
+    scrollbar-width: none; 
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent; 
   }
   nav::-webkit-scrollbar {
-    width: 6px; 
-  }
-  
-  nav::-webkit-scrollbar-track {
-    background: transparent; 
-  }
-  
-  nav::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2); 
-    border-radius: 4px; 
-  }
-  
-  /* Firefox */
-  nav {
-    scrollbar-width: thin; 
-    scrollbar-color: rgba(0, 0, 0, 0.2) transparent; 
+    width: 0; 
   }
   .nav-list {
     flex-direction: column;
