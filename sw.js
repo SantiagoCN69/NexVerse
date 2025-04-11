@@ -11,9 +11,11 @@ const urlsToCache = [
   '/icons/icon-512.png'
 ];
 
-// Desactivar caché completamente
 self.addEventListener('install', (event) => {
-  self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then((cache) => cache.addAll(urlsToCache))
+  );
 });
 
 self.addEventListener('activate', (event) => {
@@ -21,7 +23,9 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
-          return caches.delete(cacheName);
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
         })
       );
     })
@@ -29,7 +33,20 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  // Ignorar peticiones que no sean GET
+  if (event.request.method !== 'GET') return;
+
   event.respondWith(
-    fetch(event.request)
+    caches.match(event.request)
+      .then((response) => {
+        // Si está en caché, devolver respuesta
+        if (response) return response;
+
+        // Si no, hacer fetch
+        return fetch(event.request).catch(() => {
+          // Si falla el fetch, devolver página offline
+          return caches.match('/offline.html');
+        });
+      })
   );
 });

@@ -24,14 +24,14 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="icons/fontawesome/fontawesome-subset.css" />
 
-  <!-- Service Worker 
-     <script>
+  <!-- Service Worker -->
+  <script>
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/sw.js")
         .then(() => console.log("Service Worker registrado"))
         .catch(err => console.error("SW Error:", err));
     }
-  </script>-->
+  </script>
 
 </head>
 <body>
@@ -50,7 +50,7 @@
             <i class="fas fa-list-ul"></i> Categorías
           </button>
           <div class="categorias-lista" id="categoriasLista" aria-label="Lista de categorías">
-            <button id="toggleTodas" class="toggle-todas" aria-label="Seleccionar o deseleccionar todas las categorías">Seleccionar Todas</button>
+            <button id="toggleTodas" class="toggle-todas" aria-label="Seleccionar o deseleccionar todas las categorías">Todas</button>
           
             <div class="categoria-con-sub">
               <button class="categoria-btn" aria-label="Categoría 1"><i class="fas fa-folder"></i> Categoría 1</button>
@@ -95,13 +95,12 @@
 
   <footer>
     <span id="contador"><i class="fas fa-chart-bar"></i> 0 vistas</span>
-    <p class="finaltext">Desarrollado por Santiago Cardona 😼</p>
+    <span class="finaltext">Desarrollado por Santiago Cardona 😼</span>
   </footer>
 
-  <div id="modalMensaje" class="modal">
+  <div id="modalMensaje">
     <div class="modal-content">
-      <p>¡Tienes bastante tiempo libre! 🎉</p>
-      <button id="cerrarModalMensaje">Cerrar</button>
+      ¡Tienes bastante tiempo libre! 🎉
     </div>
   </div>
 

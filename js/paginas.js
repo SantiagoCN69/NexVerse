@@ -38,7 +38,7 @@ noRepetirBtn.addEventListener('click', () => {
 // ------------------- subcategorías -------------------
 const subcategoriaBotones = document.querySelectorAll('.subcategorias-lista button');
 const toggleTodasBtn = document.getElementById('toggleTodas');
-let subcategoriasSeleccionadas = JSON.parse(localStorage.getItem('subcategoriasSeleccionadas')) || [];
+let subcategoriasSeleccionadas = [];
 
 // Activar o desactivar subcategoría
 function toggleSubcategoria(boton, activar) {
@@ -92,7 +92,7 @@ toggleTodasBtn.addEventListener('click', () => {
 function inicializarSubcategorias() {
   if (subcategoriasSeleccionadas.length === 0) {
     subcategoriaBotones.forEach(b => toggleSubcategoria(b, true));
-    toggleTodasBtn.textContent = 'Deseleccionar Todas';
+    toggleTodasBtn.textContent = 'Ninguna';
   } else {
     subcategoriaBotones.forEach(b => {
       const subcat = b.dataset.subcategoria;
@@ -134,24 +134,9 @@ boton.addEventListener('click', () => {
 
   const paginaAleatoria = paginasDisponibles[Math.floor(Math.random() * paginasDisponibles.length)];
   
-  // Validación de URL segura
-  try {
-    const urlObj = new URL(paginaAleatoria.url);
-    const esURLValida = ['http:', 'https:'].includes(urlObj.protocol);
-    
-    if (esURLValida) {
-      const nuevaVentana = window.open(paginaAleatoria.url, '_blank', 'noopener,noreferrer');
-      nuevaVentana.opener = null;
-    } else {
-      console.error('URL no válida:', paginaAleatoria.url);
-      alert('No se puede abrir esta página.');
-      return;
-    }
-  } catch (error) {
-    console.error('Error al validar URL:', error);
-    alert('No se puede abrir esta página.');
-    return;
-  }
+  // Abrir página sin validación
+  const nuevaVentana = window.open(paginaAleatoria.url, '_blank', 'noopener,noreferrer');
+  nuevaVentana.opener = null;
 
   if (noRepetirActivo) {
     let paginasVisitadas = JSON.parse(localStorage.getItem('paginasVisitadas')) || [];
@@ -171,6 +156,10 @@ function actualizarContador() {
 
 // ------------------- Actualizar botón aleatorio -------------------
 function actualizarBotonAleatorio() {
+  if (!subcategoriasSeleccionadas) {
+    subcategoriasSeleccionadas = [];
+  }
+
   const cantidad = subcategoriasSeleccionadas.length;
 
   if (cantidad === 0) {

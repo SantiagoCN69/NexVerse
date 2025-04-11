@@ -18,11 +18,11 @@ function inicializarModo() {
         randomBtn.classList.add('claro');
         modoBtn.innerHTML = '<i class="fas fa-sun"></i> Modo claro';
         document.documentElement.style.setProperty('--texto', '#222');
-        document.documentElement.style.setProperty('--texto-opaco', 'rgba(0, 0, 0, 0.6)');
+        document.documentElement.style.setProperty('--texto-opaco', '#22222280');
     } else {
         modoBtn.innerHTML = '<i class="fas fa-moon"></i> Modo oscuro';
         document.documentElement.style.setProperty('--texto', '#fff');
-        document.documentElement.style.setProperty('--texto-opaco', 'rgba(255, 255, 255, 0.5)');
+        document.documentElement.style.setProperty('--texto-opaco', '#ffffff80');
     }
 }
 
@@ -34,7 +34,7 @@ function cambiarModo() {
     randomBtn.classList.toggle('claro', enClaro);
 
     document.documentElement.style.setProperty('--texto', enClaro ? '#222' : '#fff');
-    document.documentElement.style.setProperty('--texto-opaco', enClaro ? 'rgba(0, 0, 0, 0.6)' : 'rgba(255, 255, 255, 0.5)');
+    document.documentElement.style.setProperty('--texto-opaco', enClaro ? '#22222280' : '#ffffff80');
 
     modoBtn.innerHTML = enClaro
     ? '<i class="fas fa-sun"></i> Modo claro'
