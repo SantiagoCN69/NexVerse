@@ -54,7 +54,6 @@ icono.addEventListener('animationend', () => {
 function closeMenu() {
     navList.classList.remove('active');
     menuToggle.classList.remove('active');
-    header.classList.remove("menu-activo");
     
     // Close categories and subcategories when menu is closed
     categoriasLista.classList.remove("active");
@@ -66,12 +65,6 @@ function closeMenu() {
 function toggleMenu() {
     navList.classList.toggle('active');
     menuToggle.classList.toggle('active');
-
-    if (window.innerWidth < 768 && navList.classList.contains("active")) {
-        header.classList.add("menu-activo");
-    } else if (window.innerWidth < 768) {
-        header.classList.remove("menu-activo");
-    }
 }
 
 // Cerrar menú al hacer click fuera
@@ -196,7 +189,6 @@ function toggleCategoriasLista() {
     if (!header.contains(e.target)) {
       navList.classList.remove('active');
       menuToggle.classList.remove('active');
-      header.classList.remove("menu-activo");
       categoriasLista.classList.remove("active");
   
       document.querySelectorAll(".subcategorias-lista").forEach(sub => sub.classList.remove("active"));
@@ -268,9 +260,14 @@ const sugerirBtn = document.getElementById('sugerirBtn');
 sugerirBtn.addEventListener('click', () => {
   const icono = sugerirBtn.querySelector('i');
   icono.classList.add('rebote-globo');
-
   icono.addEventListener('animationend', () => {
     icono.classList.remove('rebote-globo');
-    window.location.href = '/sugerir.html';
+    if (document.startViewTransition) {
+      document.startViewTransition(() => {
+        window.location.href = '/sugerir.html';
+      });
+    } else {
+      window.location.href = '/sugerir.html';
+    }
   }, { once: true });
 });

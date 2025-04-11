@@ -102,8 +102,8 @@ p {
 #randomBtn.claro {background: linear-gradient(270deg,#fff281,#ffe387,#ff964c,#ff8bac,#ff7f7f,#ffb3b3,#b3ffff,#80e5ff,#67b0ff,#87ff91);}
 
 #randomBtn, #randomBtn.claro {
-  background-size: 1900% 1000%;
-  animation: fondo 20s linear infinite;
+  background-size: 1900% 1900%;
+  animation: fondo 30s linear infinite;
   color: var(--texto);
   padding: 15px 30px;
   font-size: 1rem;
@@ -206,7 +206,6 @@ button:hover i{
 }
 @keyframes girar-rebote {
   0% { transform: rotate(0deg); }
-  50% { transform: rotate(180deg); }
   100% { transform: rotate(360deg); }
 }
 .girar-rebote {
@@ -238,11 +237,6 @@ header {
   position: fixed;
   width: 100%;
   z-index: 10;
-  transition: box-shadow 1.5s ease, backdrop-filter 1.5s ease;
-}
-header.menu-activo {
-  backdrop-filter: blur(30px);
-  box-shadow: 0 4px 10px #00000070;
 }
 nav {
   display: flex;
@@ -305,11 +299,11 @@ nav {
   justify-content: center;
   list-style: none;
   gap: 10px;
-  margin: 2rem .6rem;
+  margin: 1rem 1rem;
   max-height: 0;
   opacity: 1;
   pointer-events: auto;
-  transition: max-height .5s ease, padding .6s ease, opacity .4s ease;
+  transition: max-height .5s ease, padding .5s ease, opacity .5s ease, margin .5s ease;
 }
 
 /* Animación rebote de items */
@@ -390,6 +384,10 @@ nav {
   padding: 0.4rem 0;
   text-align: left;
 }
+#sonidoBtn,
+#modoBtn{
+  justify-content: start;
+}
 #toggleTodas {
   justify-content: center;
   
@@ -434,17 +432,23 @@ nav {
 }
 /* ----- RESPONSIVE MOBILE ----- */
 @media (max-width: 768px) {
+  header {
+    backdrop-filter: blur(30px);
+    box-shadow: 0 4px 10px #00000070;
+  }
   .nav-list {
     flex-direction: column;
     opacity: 0;
     pointer-events: none;
     gap: 25px;
+    margin: 0 1rem;
   }
   
   .nav-list.active {
     opacity: 1;
     pointer-events: auto;
     max-height: 1000px;
+    margin: 3rem 1rem;
   }
   .nav-list li button:hover {
     transform: translateX(5px);
@@ -452,9 +456,6 @@ nav {
   .nav-list li button {
     justify-content: left;
     min-width: 150px;
-  }
-  header:not(.menu-activo) {
-    backdrop-filter: blur(0);
   }
   
   #instalarBtnLi {
