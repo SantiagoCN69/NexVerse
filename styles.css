@@ -131,7 +131,7 @@ p {
   animation: loadbottom 1s ease;
 }
 
-#randomBtn.activo:hover {
+#randomBtn:not(.desactivado):hover {
   transform: scale(1.1);
 }
 #randomBtn.desactivado {
@@ -338,7 +338,6 @@ nav {
 .nav-list li button {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0.3rem;
   padding: 0.5rem;
   background: none;
@@ -355,7 +354,9 @@ nav {
     background-color: rgba(255, 255, 255, 0.1);
   }
 }
-
+.navBoton {
+  justify-content: center;
+}
 /* ----- CATEGORÍAS ----- */
 
 .categorias-lista {
@@ -396,11 +397,12 @@ nav {
   flex-direction: column;
   gap: 1px;
 }
-
+.subcategorias-lista button {
+  min-width: 9rem !important;
+}
 .subcategorias-lista.active {
   padding-top: 1px;
   padding-left: 1rem;
-  transition: max-height 3s ease, opacity .6s ease, padding .3s ease;
 }
 .active {
   pointer-events: all;
