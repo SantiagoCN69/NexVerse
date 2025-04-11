@@ -32,7 +32,6 @@ html,body {
 }
 main, button {
   color: var(--texto);
-  transition: color 1s ease;
 }
 #randomBtn, .menu-toggle, .nav-list {
   -webkit-tap-highlight-color: transparent;
@@ -84,11 +83,13 @@ main {
 
 h1 {
   font-size: 3rem;
+  transition: color 1s ease;
 }
 
 p {
   font-size: 1.2rem;
   color: var(--texto-opaco);
+  transition: color 1s ease;
 }
 
 /* -----------BOTÓN CON GRADIENTE Y SOMBRA ANIMADA------------------ */
@@ -105,15 +106,13 @@ p {
 #randomBtn, #randomBtn.claro {
   background-size: 1900% 1900%;
   animation: fondo 30s linear infinite;
-  color: var(--texto);
   padding: 15px 30px;
   font-size: 1rem;
   border: none;
   border-radius: 30px;
-  transition: transform .4s ease;
+  transition: transform .4s ease, color 1s ease;
   will-change: transform;
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
-  transition: transform .3s;
   display: flex;
   align-items: center;
   gap: 5px;
@@ -250,7 +249,7 @@ nav {
     height: 3px;
     background-color: var(--texto);
     position: absolute;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: background-color 1s ease, transform .3s ease, opacity .3s ease;
   }
 
   & span:nth-child(1) {
@@ -330,7 +329,7 @@ nav {
   background: none;
   border: none;
   text-align: left;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 1s ease;
   min-width: 8rem;
 }
 
@@ -365,7 +364,6 @@ nav {
 .categorias-lista button {
   background: none;
   border: none;
-  color: var(--texto);
   padding: 0.4rem 0;
   text-align: left;
 }
@@ -466,6 +464,7 @@ footer {
   bottom: 0;
   padding: 10px;
   color: var(--texto-opaco);
+  transition: color 1s ease;
   width: 100%;
   margin: 0;
   justify-content: space-between;
