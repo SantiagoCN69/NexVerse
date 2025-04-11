@@ -2,32 +2,32 @@
   "paginas": [
     {
       "id": "pag1",
-      "url": "https://ejemplo.com/a",
+      "url": "hhhh",
       "subcategoria": "Subcategoría A"
     },
     {
       "id": "pag2",
-      "url": "https://ejemplo.com/b",
+      "url": "hhhh",
       "subcategoria": "Subcategoría B"
     },
     {
       "id": "pag3",
-      "url": "https://ejemplo.com/c",
+      "url": "hhhh",
       "subcategoria": "Subcategoría C"
     },
     {
       "id": "pag4",
-      "url": "https://ejemplo.com/d",
+      "url": "hhhh",
       "subcategoria": "Subcategoría D"
     },
     {
       "id": "pag5",
-      "url": "https://ejemplo.com/e",
+      "url": "hhhh",
       "subcategoria": "Subcategoría E"
     },
     {
       "id": "pag6",
-      "url": "https://ejemplo.com/f",
+      "url": "hhhh",
       "subcategoria": "Subcategoría F"
     }
   ]
