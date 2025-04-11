@@ -21,7 +21,7 @@
 }
 
 html,body {
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
   font-family: 'Poppins', sans-serif;
 }
@@ -62,8 +62,7 @@ body, body.claro {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
   z-index: -2;
   opacity: 1;
   background-size: 400% 400%;
@@ -345,13 +344,15 @@ nav {
   border: none;
   text-align: left;
   transition: transform 0.3s ease, background-color 0.3s ease;
-  min-width: 7.4rem;
+  min-width: 8rem;
 }
 
 
-.nav-list li button:hover {
-  transform: translateY(5px);
-  background-color: rgba(255, 255, 255, 0.1);
+@media (hover: hover) {
+  .nav-list li button:hover {
+    transform: translateY(5px);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 }
 .nav-list button {
   backdrop-filter: blur(10px);
@@ -420,16 +421,23 @@ nav {
   transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
 }
 
-.categorias-lista.active button:hover,
-.categoria-btn.categoria-activa,
-.subcategorias-lista button.subcategoria-activa,
-.subcategorias-lista button:hover {
+@media (hover: hover) {
+  .categorias-lista.active button:hover,
+  .categoria-btn.categoria-activa,
+  .subcategorias-lista button.subcategoria-activa,
+  .subcategorias-lista button:hover {
   transform: translateX(5px);
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.2);}
+
+  .categorias-lista.active button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 }
-.categorias-lista.active button:hover {
+.categoria-btn.categoria-activa {
+  transform: translateX(5px);
   background-color: rgba(255, 255, 255, 0.1);
 }
+
 /* ----- RESPONSIVE MOBILE ----- */
 @media (max-width: 768px) {
   header {
