@@ -383,10 +383,7 @@ nav {
 
 
 /* ----- SUBCATEGORÍAS ----- */
-.categoria-con-sub {
-  display: flex;
-  flex-direction: column;
-}
+
 
 /* Subcategorías animadas como categorías */
 .subcategorias-lista {
@@ -401,7 +398,7 @@ nav {
   pointer-events: all;
   max-height: 600px;
   opacity: 1;
-  padding: 0.2rem 1rem;
+  padding: 0.2rem 0 0 1rem;
   transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
 }
 
