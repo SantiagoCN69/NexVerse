@@ -1,4 +1,4 @@
-const APP_VERSION = 'v1.3.6';
+const APP_VERSION = 'v1.3.9';
 const CACHE_NAME = `sitios-randoms-${APP_VERSION}`;
 
 const urlsToCache = [
@@ -25,12 +25,12 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
-          // Eliminar TODOS los cachés antiguos, sin importar el nombre
+          
           return caches.delete(cacheName);
         })
       );
     }).then(() => {
-      // Tomar control inmediato de todas las páginas
+
       return self.clients.claim();
     })
   );
