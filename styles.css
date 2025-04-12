@@ -126,7 +126,7 @@ p {
 }
 
 #randomBtn::after {
-  background: linear-gradient(270deg, #fff281, #ffe387, #ff964c, #ff8bac, #ff7f7f, #ffb3b3, #b3ffff, #80e5ff, #67b0ff, #87ff91);
+  background: linear-gradient(270deg, #fff281, #ffe387, #ff964c, #ff8bac, #ff7f7f, #ffb3b3, #b3ffff, #80e5ff, #d7ff97, #87ff91);
   opacity: 0;
 }
 
@@ -166,9 +166,10 @@ p {
 #randomBtn:not(.desactivado) {
   animation: loadbottom 1s ease;
 }
-
-#randomBtn:not(.desactivado):hover {
-  transform: scale(1.1);
+@media (hover: hover) {
+  #randomBtn:not(.desactivado):hover {
+    transform: scale(1.1);
+  }
 }
 #randomBtn.desactivado {
   background: #888;
