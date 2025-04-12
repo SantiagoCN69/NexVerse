@@ -72,13 +72,24 @@ function toggleMenu() {
 }
 
 function toggleCategoriasLista() {
+    const seAbrio = !categoriasLista.classList.contains('active');
+    
     categoriasLista.classList.toggle('active');
     actualizarHeaderActivo();
+
     const icono = toggleCategoria.querySelector('i');
     icono.classList.add('bounce-giro');
     icono.addEventListener('animationend', () => icono.classList.remove('bounce-giro'), { once: true });
+
+    if (!seAbrio) {
+        document.querySelectorAll(".subcategorias").forEach(sub => sub.classList.remove("active"));
+        document.querySelectorAll('.categoria-btn i').forEach(icon => icon.classList.remove('fa-folder-open'));
+        document.querySelectorAll(".subcategorias-lista").forEach(sub => sub.classList.remove("active"));
+    }
+
     if (window.actualizarContadorCategorias) window.actualizarContadorCategorias();
 }
+
 
 function actualizarHeaderActivo() {
     const hayActivos = categoriasLista.classList.contains("active") ||

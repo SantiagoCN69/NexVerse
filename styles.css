@@ -403,6 +403,7 @@ nav {
   max-width: 0;
   opacity: 0;
   pointer-events: none;
+  
 }
 
 .categorias-lista.active {
@@ -423,7 +424,7 @@ nav {
 
 .subcategorias-lista,
 .categorias-lista {
-  transition: max-height .2s ease, opacity .4s ease, padding .2s ease;
+  transition: max-height .3s linear, opacity .3s ease, padding .1s linear;
 }
 .subcategorias-lista {
   pointer-events: none;

@@ -1,4 +1,4 @@
-const APP_VERSION = 'v1.3.4';
+const APP_VERSION = 'v1.3.6';
 const CACHE_NAME = `sitios-randoms-${APP_VERSION}`;
 
 const urlsToCache = [
@@ -12,7 +12,6 @@ const urlsToCache = [
 ];
 
 self.addEventListener('install', (event) => {
-  // Forzar la actualización inmediata del Service Worker
   self.skipWaiting();
   
   event.waitUntil(
