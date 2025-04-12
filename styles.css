@@ -402,17 +402,20 @@ nav {
   display: flex;
   flex-direction: column;
   max-height: 0;
-  max-width: 0;
+  max-width: 90px;
   opacity: 0;
   pointer-events: none;
-  
+  gap: 1px;
+
 }
 
 .categorias-lista.active {
-  padding: 0.2rem 0 0.2rem 1rem;
-  gap: 1px;
+  margin: 25px 0 0 1rem;
 }
 
+#toggleCategoria {
+  min-width: 8.5rem;
+}
 #sonidoBtn,
 #modoBtn{
   justify-content: start;
@@ -424,15 +427,11 @@ nav {
 
 /* ----- SUBCATEGORÍAS ----- */
 
-.subcategorias-lista,
-.categorias-lista {
-  transition: max-height .3s linear, opacity .3s ease, padding .1s linear;
-}
+
 .subcategorias-lista {
   pointer-events: none;
   max-height: 0;
   opacity: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 1px;
@@ -441,8 +440,20 @@ nav {
   min-width: 9rem !important;
 }
 .subcategorias-lista.active {
-  padding-top: 1px;
-  padding-left: 1rem;
+  margin-top: 1px;
+  margin-left: 1rem;
+}
+.categorias-lista, .subcategorias-lista {
+  transition:
+    max-height 0.2s ease,
+    margin 0.4s ease,
+    opacity 0.2s ease;
+}
+.categorias-lista.active, .subcategorias-lista.active {
+  transition:
+  max-height 1s ease,
+  margin 0.4s ease,
+  opacity 0.2s ease; 
 }
 .active {
   pointer-events: all;
