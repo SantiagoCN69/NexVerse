@@ -108,34 +108,104 @@ document.addEventListener("click", (e) => {
 });
 
 // ------------------- SONIDO -------------------
-const toggleSound = new Audio('assets/toggle.mp3');
-const clickSound = new Audio('assets/click.mp3');
-let sonidoRandomActivo = localStorage.getItem('sonidoRandomActivo') === null ? true : localStorage.getItem('sonidoRandomActivo') === 'true';
+// Elementos
+const sonidoLista = document.querySelector(".sonido-lista");
+const btnToggleAudio = document.getElementById("SonidoBoton");
+const fondoToggleAudio = document.getElementById("SonidoFondo");
+const efectosToggleAudio = document.getElementById("SonidoEfectos");
 
-function inicializarSonido() {
-    sonidoBtn.innerHTML = sonidoRandomActivo
-        ? '<i class="fas fa-headphones"></i> Sonido: ON'
-        : '<i class="fas fa-headphones"></i> Sonido: OFF';
+// Audios
+const clickAudio = new Audio("assets/click.mp3");
+const fondoAudio = new Audio("assets/fondo.mp3");
+fondoAudio.loop = true;
+const toggleAudio = new Audio("assets/toggle.mp3");
+
+// Estados iniciales (por defecto o localStorage)
+let sonidoBotonActivo = getEstado("sonidoBotonActivo", true);
+let sonidoFondoActivo = getEstado("sonidoFondoActivo", false);
+let sonidoEfectosActivo = getEstado("sonidoEfectosActivo", true);
+
+// Aplicar estados visuales iniciales
+actualizarEstado(btnToggleAudio, sonidoBotonActivo);
+actualizarEstado(fondoToggleAudio, sonidoFondoActivo);
+actualizarEstado(efectosToggleAudio, sonidoEfectosActivo);
+if (sonidoFondoActivo) fondoAudio.play();
+
+// Mostrar/ocultar lista
+sonidoBtn.addEventListener("click", () => {
+  const visible = sonidoLista.classList.toggle("active");
+
+  if (visible) {
+    reproducirToggle();
+    mostrarContadorActivos();
+  } else {
+    ocultarContador();
+  }
+});
+
+// Botón 1 - sonido botón randomBtn
+btnToggleAudio.addEventListener("click", () => {
+  sonidoBotonActivo = !sonidoBotonActivo;
+  setEstado("sonidoBotonActivo", sonidoBotonActivo);
+  actualizarEstado(btnToggleAudio, sonidoBotonActivo);
+  reproducirToggle();
+  mostrarContadorActivos();
+});
+
+// Botón 2 - fondo.mp3
+fondoToggleAudio.addEventListener("click", () => {
+  sonidoFondoActivo = !sonidoFondoActivo;
+  setEstado("sonidoFondoActivo", sonidoFondoActivo);
+  actualizarEstado(fondoToggleAudio, sonidoFondoActivo);
+  sonidoFondoActivo ? fondoAudio.play() : fondoAudio.pause();
+  reproducirToggle();
+  mostrarContadorActivos();
+});
+
+// Botón 3 - efectos toggle.mp3
+efectosToggleAudio.addEventListener("click", () => {
+  sonidoEfectosActivo = !sonidoEfectosActivo;
+  setEstado("sonidoEfectosActivo", sonidoEfectosActivo);
+  actualizarEstado(efectosToggleAudio, sonidoEfectosActivo);
+  reproducirToggle();
+  mostrarContadorActivos();
+});
+
+// randomBtn click con click.mp3 si está activo
+randomBtn.addEventListener("click", () => {
+  if (sonidoBotonActivo) clickAudio.play();
+});
+
+// Reproduce toggle.mp3 al hacer clic en cualquier botón, excepto randomBtn
+document.querySelectorAll("button").forEach(boton => {
+    if (boton.id !== "randomBtn") {
+      boton.addEventListener("click", () => {
+        if (sonidoEfectosActivo) toggleAudio.play();
+      });
+    }
+  });
+  
+
+// Cambiar texto ON/OFF y clase
+function actualizarEstado(boton, activo) {
+  boton.classList.toggle("Audio-Activo", activo);
+  const partes = boton.innerHTML.split(":");
+  boton.innerHTML = `${partes[0]}: ${activo ? "ON" : "OFF"}`;
 }
 
-sonidoBtn.addEventListener('click', () => {
-    sonidoRandomActivo = !sonidoRandomActivo;
-    localStorage.setItem('sonidoRandomActivo', sonidoRandomActivo);
-    inicializarSonido();
-    const icono = sonidoBtn.querySelector('i');
-    icono.classList.add('pulso');
-    icono.addEventListener('animationend', () => icono.classList.remove('pulso'), { once: true });
-});
 
-randomBtn.addEventListener('click', () => {
-    if (sonidoRandomActivo) clickSound.play().catch(e => console.log("Error al reproducir sonido de click: ", e));
-});
 
-document.querySelectorAll('header button').forEach(boton => {
-    boton.addEventListener('click', () => {
-        toggleSound.play().catch(e => console.log("Error al reproducir sonido de toggle: ", e));
-    });
-});
+// Guardar en localStorage
+function setEstado(clave, valor) {
+  localStorage.setItem(clave, JSON.stringify(valor));
+}
+
+// Leer de localStorage o usar valor por defecto
+function getEstado(clave, porDefecto) {
+  const guardado = localStorage.getItem(clave);
+  return guardado !== null ? JSON.parse(guardado) : porDefecto;
+}
+
 
 // ------------------- NAVEGACIÓN -------------------
 sugerirBtn.addEventListener('click', () => {
