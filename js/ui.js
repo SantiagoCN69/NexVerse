@@ -59,6 +59,7 @@ function closeMenu() {
     document.querySelectorAll('.categoria-btn i').forEach(icon => icon.classList.remove('fa-folder-open'));
     document.querySelectorAll(".subcategorias-lista").forEach(sub => sub.classList.remove("active"));
     header.classList.remove("active");
+    sonidoLista.classList.remove("active");
 }
 
 function toggleMenu() {
@@ -137,9 +138,6 @@ sonidoBtn.addEventListener("click", () => {
 
   if (visible) {
     reproducirToggle();
-    mostrarContadorActivos();
-  } else {
-    ocultarContador();
   }
 });
 
