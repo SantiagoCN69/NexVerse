@@ -1,6 +1,7 @@
 # Archivos de sistema
 .DS_Store
 Thumbs.db
+.vscode
 
 # Archivos de configuración de editores
 .vscode/
