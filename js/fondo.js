@@ -22,6 +22,22 @@ window.addEventListener('click', () => {
   setTimeout(() => (repel = false), 300);
 });
 
+window.addEventListener('touchstart', e => {
+  if (e.touches.length > 0) {
+    mouse.x = e.touches[0].clientX;
+    mouse.y = e.touches[0].clientY;
+  }
+  repel = true;
+  setTimeout(() => (repel = false), 300);
+});
+
+window.addEventListener('touchmove', e => {
+  if (e.touches.length > 0) {
+    mouse.x = e.touches[0].clientX;
+    mouse.y = e.touches[0].clientY;
+  }
+});
+
 window.addEventListener('deviceorientation', e => {
   mouse.x = window.innerWidth / 2 + e.gamma * 15;
   mouse.y = window.innerHeight / 2 + e.beta * 15;

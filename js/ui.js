@@ -147,7 +147,7 @@ btnToggleAudio.addEventListener("click", () => {
   setEstado("sonidoBotonActivo", sonidoBotonActivo);
   actualizarEstado(btnToggleAudio, sonidoBotonActivo);
   reproducirToggle();
-  mostrarContadorActivos();
+  // mostrarContadorActivos();
 });
 
 // Botón 2 - fondo.mp3
@@ -157,7 +157,7 @@ fondoToggleAudio.addEventListener("click", () => {
   actualizarEstado(fondoToggleAudio, sonidoFondoActivo);
   sonidoFondoActivo ? fondoAudio.play() : fondoAudio.pause();
   reproducirToggle();
-  mostrarContadorActivos();
+  // mostrarContadorActivos();
 });
 
 // Botón 3 - efectos toggle.mp3
@@ -166,7 +166,7 @@ efectosToggleAudio.addEventListener("click", () => {
   setEstado("sonidoEfectosActivo", sonidoEfectosActivo);
   actualizarEstado(efectosToggleAudio, sonidoEfectosActivo);
   reproducirToggle();
-  mostrarContadorActivos();
+  // mostrarContadorActivos();
 });
 
 // randomBtn click con click.mp3 si está activo
@@ -191,7 +191,13 @@ function actualizarEstado(boton, activo) {
   boton.innerHTML = `${partes[0]}: ${activo ? "ON" : "OFF"}`;
 }
 
-
+// Reproducir sonido toggle.mp3
+function reproducirToggle() {
+  if (typeof toggleAudio !== 'undefined') {
+    toggleAudio.currentTime = 0;
+    toggleAudio.play();
+  }
+}
 
 // Guardar en localStorage
 function setEstado(clave, valor) {
@@ -221,4 +227,4 @@ sugerirBtn.addEventListener('click', () => {
 
 // ------------------- INICIALIZAR -------------------
 inicializarModo();
-inicializarSonido();
+// inicializarSonido();
