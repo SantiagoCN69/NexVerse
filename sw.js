@@ -1,4 +1,4 @@
-const APP_VERSION = 'v1.5.9';
+const APP_VERSION = 'v1.6.0';
 const CACHE_NAME = `sitios-randoms-${APP_VERSION}`;
 
 const urlsToCache = [
@@ -24,15 +24,11 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
-        cacheNames.map((cacheName) => {
-          
-          return caches.delete(cacheName);
-        })
+        cacheNames
+          .filter((cacheName) => cacheName !== CACHE_NAME)
+          .map((cacheName) => caches.delete(cacheName))
       );
-    }).then(() => {
-
-      return self.clients.claim();
-    })
+    }).then(() => self.clients.claim())
   );
 });
 
