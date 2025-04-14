@@ -279,6 +279,131 @@
           ]
         }
       ]
+    },
+    {
+      "nombre": "Convertidores",
+      "subcategorias": [
+        {
+          "nombre": "Monedas",
+          "paginas": [
+            {
+              "id": "p53",
+              "titulo": "Convertir Monedas",
+              "url": "https://wise.com/es/currency-converter/"
+            },
+            {
+              "id": "p54",
+              "titulo": "Convertir Monedas",
+              "url": "https://cuex.com/es/"
+            }
+          ]
+        },
+        {
+          "nombre": "Unidades",
+          "paginas": [
+            {
+              "id": "p55",
+              "titulo": "Convertir Unidades",
+              "url": "https://www.convertworld.com/es/"
+            },
+            {
+              "id": "p56",
+              "titulo": "Convertir Unidades",
+              "url": "https://www.conversordeunidades.org/"
+            }
+          ]
+        },
+        {
+          "nombre": "Imagenes",
+          "paginas": [
+            {
+              "id": "p57",
+              "titulo": "Convertir Imagenes",
+              "url": "https://www.iloveimg.com/es/"
+            }
+          ]
+        },
+        {
+          "nombre": "Imagen a Texto (OCR)",
+          "paginas": [
+            {
+              "id": "p58",
+              "titulo": "Convertir Imagen a Texto",
+              "url": "https://www.imagetotext.info/es/imagen-a-texto"
+            },
+            {
+              "id": "p59",
+              "titulo": "Convertir Imagen a Texto",
+              "url": "https://www.editpad.org/tool/es/imagen-a-texto"
+            }
+          ]
+        },
+        {
+          "nombre": "PDF",
+          "paginas": [
+            {
+              "id": "p60",
+              "titulo": "Convertir PDF",
+              "url": "https://www.ilovepdf.com/es"
+            }
+          ]
+        },
+        {
+          "nombre": "Audio",
+          "paginas": [
+            {
+              "id": "p61",
+              "titulo": "Convertir Audio",
+              "url": "https://online-audio-converter.com/sp/"
+            },
+            {
+              "id": "p62",
+              "titulo": "Convertir Audio",
+              "url": "https://convertio.co/es/audio-converter/"
+            }
+          ]
+        },
+        {
+          "nombre": "YouTube",
+          "paginas": [
+            {
+              "id": "p63",
+              "titulo": "Convertir YouTube",
+              "url": "https://notube.si/es/youtube-app-138"
+            }
+          ]
+        },
+        {
+          "nombre": "Colores",
+          "paginas": [
+            {
+              "id": "p64",
+              "titulo": "Convertir Colores",
+              "url": "https://divmagic.com/es/tools/color-converter"
+            }
+          ]
+        },
+        {
+          "nombre": "Tiempo",
+          "paginas": [
+            {
+              "id": "p65",
+              "titulo": "Convertir Tiempo",
+              "url": "https://www.convertworld.com/es/tiempo/"
+            }
+          ]
+        },
+        {
+          "nombre": "Emoji",
+          "paginas": [
+            {
+              "id": "p66",
+              "titulo": "Convertir Emoji",
+              "url": "https://lingojam.com/EmojitoUnicodeConverter"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
