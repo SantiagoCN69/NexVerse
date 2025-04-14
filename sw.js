@@ -1,4 +1,4 @@
-const APP_VERSION = 'v1.5.8';
+const APP_VERSION = 'v1.5.9';
 const CACHE_NAME = `sitios-randoms-${APP_VERSION}`;
 
 const urlsToCache = [
