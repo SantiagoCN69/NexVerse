@@ -476,11 +476,7 @@ button {
   nav {
     max-height: 100vh;
     overflow: auto;
-    scrollbar-width: none; 
-    scrollbar-color: rgba(0, 0, 0, 0.2) transparent; 
-  }
-  nav::-webkit-scrollbar {
-    width: 0; 
+    scrollbar-width: none;
   }
   .nav-list {
     flex-direction: column;
