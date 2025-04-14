@@ -5,6 +5,15 @@ let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 let repel = false;
 let modalMostrado = false;
 
+// Detectar si es dispositivo táctil
+const esDispositivoMovil = () => {
+  return (
+    'ontouchstart' in window ||
+    navigator.maxTouchPoints > 0 ||
+    navigator.msMaxTouchPoints > 0
+  );
+};
+
 const resizeCanvas = () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -17,18 +26,25 @@ window.addEventListener('mousemove', e => {
   mouse.y = e.clientY;
 });
 
-window.addEventListener('click', () => {
-  repel = true;
-  setTimeout(() => (repel = false), 300);
-});
+// Solo activar dispersión con click en escritorio
+if (!esDispositivoMovil()) {
+  window.addEventListener('click', () => {
+    repel = true;
+    setTimeout(() => (repel = false), 300);
+  });
+}
 
 window.addEventListener('touchstart', e => {
   if (e.touches.length > 0) {
     mouse.x = e.touches[0].clientX;
     mouse.y = e.touches[0].clientY;
   }
-  repel = true;
-  setTimeout(() => (repel = false), 300);
+  // No activar dispersión en móviles
+  // Si quieres que sí lo haga, descomenta lo siguiente:
+  // if (!esDispositivoMovil()) {
+  //   repel = true;
+  //   setTimeout(() => (repel = false), 300);
+  // }
 });
 
 window.addEventListener('touchmove', e => {

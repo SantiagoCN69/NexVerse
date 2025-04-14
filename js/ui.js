@@ -60,6 +60,7 @@ function closeMenu() {
     document.querySelectorAll(".subcategorias-lista").forEach(sub => sub.classList.remove("active"));
     header.classList.remove("active");
     sonidoLista.classList.remove("active");
+    actualizarContadorSonidos(); // Ocultar contador
 }
 
 function toggleMenu() {
@@ -135,10 +136,10 @@ if (sonidoFondoActivo) fondoAudio.play();
 // Mostrar/ocultar lista
 sonidoBtn.addEventListener("click", () => {
   const visible = sonidoLista.classList.toggle("active");
-
   if (visible) {
     reproducirToggle();
   }
+  actualizarContadorSonidos(); // Actualizar visibilidad
 });
 
 // Botón 1 - sonido botón randomBtn
@@ -147,7 +148,6 @@ btnToggleAudio.addEventListener("click", () => {
   setEstado("sonidoBotonActivo", sonidoBotonActivo);
   actualizarEstado(btnToggleAudio, sonidoBotonActivo);
   reproducirToggle();
-  // mostrarContadorActivos();
 });
 
 // Botón 2 - fondo.mp3
@@ -157,7 +157,6 @@ fondoToggleAudio.addEventListener("click", () => {
   actualizarEstado(fondoToggleAudio, sonidoFondoActivo);
   sonidoFondoActivo ? fondoAudio.play() : fondoAudio.pause();
   reproducirToggle();
-  // mostrarContadorActivos();
 });
 
 // Botón 3 - efectos toggle.mp3
@@ -166,7 +165,6 @@ efectosToggleAudio.addEventListener("click", () => {
   setEstado("sonidoEfectosActivo", sonidoEfectosActivo);
   actualizarEstado(efectosToggleAudio, sonidoEfectosActivo);
   reproducirToggle();
-  // mostrarContadorActivos();
 });
 
 // randomBtn click con click.mp3 si está activo
@@ -189,6 +187,7 @@ function actualizarEstado(boton, activo) {
   boton.classList.toggle("Audio-Activo", activo);
   const partes = boton.innerHTML.split(":");
   boton.innerHTML = `${partes[0]}: ${activo ? "ON" : "OFF"}`;
+  actualizarContadorSonidos();
 }
 
 // Reproducir sonido toggle.mp3
@@ -210,6 +209,32 @@ function getEstado(clave, porDefecto) {
   return guardado !== null ? JSON.parse(guardado) : porDefecto;
 }
 
+// --- CONTADOR DE SONIDOS ACTIVOS ---
+function actualizarContadorSonidos() {
+  let activos = 0;
+  if (sonidoBotonActivo) activos++;
+  if (sonidoFondoActivo) activos++;
+  if (sonidoEfectosActivo) activos++;
+  let contador = document.getElementById('contadorSonidos');
+  if (!contador) {
+    contador = document.createElement('span');
+    contador.id = 'contadorSonidos';
+    contador.style.marginLeft = '2px'; // Menos separación
+    contador.style.fontSize = '0.95em';
+    contador.style.opacity = '0.7';
+    sonidoBtn.appendChild(contador);
+  }
+  contador.textContent = `(${activos})`;
+  // Mostrar solo si la lista está activa
+  if (sonidoLista.classList.contains('active')) {
+    contador.style.display = 'inline';
+  } else {
+    contador.style.display = 'none';
+  }
+}
+
+// Inicializar contador al cargar
+actualizarContadorSonidos();
 
 // ------------------- NAVEGACIÓN -------------------
 sugerirBtn.addEventListener('click', () => {
@@ -227,4 +252,3 @@ sugerirBtn.addEventListener('click', () => {
 
 // ------------------- INICIALIZAR -------------------
 inicializarModo();
-// inicializarSonido();

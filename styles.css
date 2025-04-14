@@ -73,7 +73,7 @@ body::after {
   width: 100%;
   height: 100%;
   background-size: 400% 400%;
-  transition: opacity 1s ease;
+  transition: opacity 2s ease;
   z-index: -2;
   animation: fondo 30s ease-in-out infinite;
 }
@@ -410,6 +410,7 @@ nav {
   pointer-events: none;
   gap: 1px;
   text-wrap: nowrap;
+  will-change: max-height, opacity, pointer-events, margin;
 }
 
 .categorias-lista.active {
@@ -428,7 +429,9 @@ nav {
   min-width: 9rem;
   width: max-content;
 }
-
+.sonido-lista.active{
+  margin: 15px 0 0 1rem;
+}
 #toggleCategoria {
   min-width: 8.5rem;
 }
@@ -528,8 +531,13 @@ footer {
   text-wrap: balance;
   animation: loadbottom 1s ease;
 }
-.finaltext,
+
 #contador {
-  font-size: 0.8rem;
   display: flex;
+  align-items: end;
+  text-wrap: nowrap;
+
+}
+.finaltext {
+  text-align: end;
 }
