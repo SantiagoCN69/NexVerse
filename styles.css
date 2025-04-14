@@ -529,7 +529,13 @@ button {
   .menu-toggle {
     display: block;
     }
-}
+    .subcategorias-lista.active {
+      overflow-y: visible;
+      max-height: 1000px;
+      scrollbar-width: none;
+    }
+  }
+
 
 /* -----------FOOTER------------------ */
 
