@@ -60,7 +60,8 @@ function closeMenu() {
     document.querySelectorAll(".subcategorias-lista").forEach(sub => sub.classList.remove("active"));
     header.classList.remove("active");
     sonidoLista.classList.remove("active");
-    actualizarContadorSonidos(); // Ocultar contador
+    actualizarContadorSonidos();
+    actualizarContadorCategorias();
 }
 
 function toggleMenu() {
@@ -219,7 +220,7 @@ function actualizarContadorSonidos() {
   if (!contador) {
     contador = document.createElement('span');
     contador.id = 'contadorSonidos';
-    contador.style.marginLeft = '2px'; // Menos separación
+    contador.style.marginLeft = '2px';
     contador.style.fontSize = '0.95em';
     contador.style.opacity = '0.7';
     sonidoBtn.appendChild(contador);
@@ -233,7 +234,7 @@ function actualizarContadorSonidos() {
   }
 }
 
-// Inicializar contador al cargar
+// Llamar al cargar para que el contador esté bien desde el inicio
 actualizarContadorSonidos();
 
 // ------------------- NAVEGACIÓN -------------------

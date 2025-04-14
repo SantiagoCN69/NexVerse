@@ -89,25 +89,29 @@ function actualizarContadorCategorias() {
     const toggleCategoria = document.getElementById('toggleCategoria');
     const categoriasLista = document.getElementById('categoriasLista');
     if (!toggleCategoria || !categoriasLista) return;
-  
-    const existeSpan = toggleCategoria.querySelector('.contador-categorias');
-  
-    if (categoriasLista.classList.contains('active')) {
-      if (!existeSpan) {
-        const span = document.createElement('span');
-        span.className = 'contador-categorias';
-        span.textContent = ` (${cantidad})`;
-        toggleCategoria.appendChild(span);
-      } else {
-        existeSpan.textContent = ` (${cantidad})`;
-      }
-    } else if (existeSpan) {
-      existeSpan.remove();
+
+    let contador = document.getElementById('contadorCategorias');
+    if (!contador) {
+      contador = document.createElement('span');
+      contador.id = 'contadorCategorias';
+      contador.style.marginLeft = '2px';
+      contador.style.fontSize = '0.95em';
+      contador.style.opacity = '0.7';
+      toggleCategoria.appendChild(contador);
     }
-  }
-  
-  window.actualizarContadorCategorias = actualizarContadorCategorias;
-  
+    contador.textContent = `(${cantidad})`;
+    // Mostrar solo si la lista está activa
+    if (categoriasLista.classList.contains('active')) {
+      contador.style.display = 'inline';
+    } else {
+      contador.style.display = 'none';
+    }
+}
+
+window.actualizarContadorCategorias = actualizarContadorCategorias;
+
+// Llamar al cargar para que el contador esté bien desde el inicio
+actualizarContadorCategorias();
 
 // Inicializar al cargar
 inicializarSubcategorias();

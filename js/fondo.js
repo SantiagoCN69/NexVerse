@@ -39,12 +39,7 @@ window.addEventListener('touchstart', e => {
     mouse.x = e.touches[0].clientX;
     mouse.y = e.touches[0].clientY;
   }
-  // No activar dispersión en móviles
-  // Si quieres que sí lo haga, descomenta lo siguiente:
-  // if (!esDispositivoMovil()) {
-  //   repel = true;
-  //   setTimeout(() => (repel = false), 300);
-  // }
+
 });
 
 window.addEventListener('touchmove', e => {
