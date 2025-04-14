@@ -112,13 +112,19 @@ function actualizarContadorCategorias() {
 // Inicializar al cargar
 inicializarSubcategorias();
 
-// Manejar apertura de subcategorías (permite múltiples abiertas)
+// Manejar apertura de subcategorías ( no permite múltiples abiertas)
 document.querySelectorAll('.categoria-btn').forEach(btn => {
   btn.addEventListener('click', (e) => {
     const subcategoriaLista = e.currentTarget.nextElementSibling;
     const iconElement = e.currentTarget.querySelector('i');
 
-    // Toggle la subcategoría clickeada
+    document.querySelectorAll('.subcategorias-lista').forEach(sub => {
+      if (sub !== subcategoriaLista) sub.classList.remove('active');
+    });
+    document.querySelectorAll('.categoria-btn i').forEach(icon => {
+      if (icon !== iconElement) icon.classList.remove('fa-folder-open');
+    });
+
     if (subcategoriaLista) {
       subcategoriaLista.classList.toggle('active');
       iconElement.classList.toggle('fa-folder-open');
@@ -134,6 +140,7 @@ document.querySelectorAll('.categoria-btn').forEach(btn => {
     header.classList.toggle("active", hayActivos);
   });
 });
+
 
   
 // Ocultar contador si haces clic fuera del header o redimensionas
