@@ -1,4 +1,4 @@
-const APP_VERSION = 'v1.7.2';
+const APP_VERSION = 'v1.7.3';
 const CACHE_NAME = `sitios-randoms-${APP_VERSION}`;
 
 const urlsToCache = [
@@ -8,7 +8,7 @@ const urlsToCache = [
   '/js/fondo.js',
   '/js/paginas.js',
   '/js/instalar.js',
-  '/icons/icon-512.png'
+  '/icons/icono-nexverse-moderno.png'
 ];
 
 self.addEventListener('install', (event) => {
