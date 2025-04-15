@@ -314,7 +314,7 @@
           ]
         },
         {
-          "nombre": "Imagenes",
+          "nombre": "ConversorImagenes",
           "paginas": [
             {
               "id": "p57",
@@ -400,6 +400,21 @@
               "id": "p66",
               "titulo": "Convertir Emoji",
               "url": "https://lingojam.com/EmojitoUnicodeConverter"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nombre": "Compresores",
+      "subcategorias": [
+        {
+          "nombre": "CompresorImagenes",
+          "paginas": [
+            {
+              "id": "p67",
+              "titulo": "Compresor Imagenes",
+              "url": "https://tinypng.com/"
             }
           ]
         }
