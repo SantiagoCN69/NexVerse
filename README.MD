@@ -42,7 +42,7 @@ paginas-randoms/
 - [AOS](https://michalsnik.github.io/aos/) (Animate On Scroll Library)
 
 ## 📸 Captura de Pantalla
-![Captura de Pantalla](/cap/Captura%20de%20pantalla%20(260).png)
+![Captura de Pantalla](/cap/Captura%20de%20pantalla%20(262).png)
 
 ## 🤝 Contribuciones
 ¡Las contribuciones son bienvenidas! Por favor, lee las [directrices de contribución](CONTRIBUTING.md) antes de enviar un pull request.
