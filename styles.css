@@ -481,7 +481,7 @@ nav {
     box-shadow: 0 4px 10px #00000070;
   }
   nav {
-    max-height: 100vh;
+    max-height: 100dvh;
     overflow: auto;
     scrollbar-width: none;
   }
